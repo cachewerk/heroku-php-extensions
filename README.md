@@ -1,19 +1,18 @@
 # Heroku PHP Extensions
 
-Pre-built PHP extensions for Heroku.
+Pre-built PHP extensions for Heroku that are not included or fully supported by the official [PHP buildpack](https://github.com/heroku/heroku-buildpack-php).
 
 - [igbinary](https://pecl.php.net/package/igbinary)
-- [PhpRedis](https://pecl.php.net/package/redis) _(with lzf, lz4, zstd, igbinary support)_
+- [PhpRedis](https://pecl.php.net/package/redis) (with _lzf, lz4, zstd and igbinary_ support)
 - [Relay](https://relaycache.com) _(coming soon)_
 
-The supported PHP versions are `7.3`, `7.4` and `8.0` on `heroku-18` and `heroku-20`.
+The supported PHP versions are `7.3`, `7.4` and `8.0` on the `heroku-18` and `heroku-20` stacks.
 
-- [S3 bucket browser](https://s3.us-east-1.amazonaws.com/heroku-php-extensions/index.html)
-- [Heroku demo app](https://php-extensions.herokuapp.com)
+You can [browse the S3 bucket](https://s3.us-east-1.amazonaws.com/heroku-php-extensions/index.html) and checkout the [demo app](https://php-extensions.herokuapp.com).
 
 ## Usage
 
-Find out your app’s stack by running `heroku info`, then add the repository according to the stack version of your application:
+First, find out your app’s stack by running `heroku info`, then add the corresponding repository to your application:
 
 ```bash
 # heroku-18
@@ -23,7 +22,7 @@ heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://heroku-php-extension
 heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://heroku-php-extensions.s3.amazonaws.com/dist-heroku-20-stable/"
 ```
 
-Then add any of the extensions to `composer.json`:
+Next, add any of the extensions to `composer.json` as you usually would:
 
 ```bash
 composer require ext-igbinary:*
@@ -33,7 +32,7 @@ composer require ext-redis:*
 
 ## Development
 
-Before continuing, read the [the build readme](https://github.com/heroku/heroku-buildpack-php/blob/main/support/build/README.md).
+Before continuing, read and understand the [official build instructions](https://github.com/heroku/heroku-buildpack-php/blob/main/support/build/README.md).
 
 ### Set up
 
@@ -41,16 +40,18 @@ Before continuing, read the [the build readme](https://github.com/heroku/heroku-
 # Install Composer dependencies
 composer install
 
-# Copy python requirements
+# Copy Python requirements
 cp vendor/heroku/heroku-buildpack-php/requirements.txt .
 
 # Create environment file
 cp .env.example .env
 ```
 
-You must set the all variables in the `.env` file.
+Be sure to set all variables in your newly created `.env` file.
 
 ### Dockerfile
+
+Create a custom Dockerfile for `heroku-20`.
 
 ```
 cat vendor/heroku/heroku-buildpack-php/support/build/_docker/heroku-20.Dockerfile > docker/build/heroku-20.Dockerfile
