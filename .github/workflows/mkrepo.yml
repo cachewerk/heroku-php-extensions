@@ -1,7 +1,14 @@
 
 name: Make repositories
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Build extensions"]
+    branches:
+      - main
+    types:
+      - completed
 
 jobs:
 
@@ -9,6 +16,8 @@ jobs:
     name: Make repository
     runs-on: ubuntu-latest
     timeout-minutes: 20
+
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
 
     strategy:
       matrix:
