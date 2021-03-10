@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
+- Overhauled demo app
 - Only build on `push` to `main` branch
 - Sync repos when a release is published
 - Make repos after successful build workflow
