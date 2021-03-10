@@ -38,6 +38,7 @@ jobs:
 
       - name: Build Dockerfile
         run: |
+          mkdir build
           cat ${BUILDPACK}/support/build/_docker/${{ matrix.stack }}.Dockerfile > build/${{ matrix.stack }}.Dockerfile
           cat docker/${{ matrix.stack }}.Dockerfile >> build/${{ matrix.stack }}.Dockerfile
 
