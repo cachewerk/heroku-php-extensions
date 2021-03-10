@@ -1,0 +1,13 @@
+{
+    "name": "cachewerk/heroku-php-extensions",
+    "description": "Pre-built PHP extensions for Heroku.",
+    "type": "library",
+    "require": {
+        "php": "^8.0",
+        "ext-igbinary": "*",
+        "ext-redis": "*"
+    },
+    "require-dev": {
+        "heroku/heroku-buildpack-php": "dev-main"
+    }
+}

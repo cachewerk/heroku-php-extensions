@@ -1,0 +1,47 @@
+
+name: Synchronize
+
+on: workflow_dispatch
+
+jobs:
+
+  sync:
+    name: Synchronize
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    strategy:
+      matrix:
+        stack: ['heroku-18', 'heroku-20']
+
+    env:
+      S3_BUCKET: heroku-php-extensions
+      BUILDPACK: ./vendor/heroku/heroku-buildpack-php
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Composer Install
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Copy requirements
+        run: cp ${BUILDPACK}/requirements.txt .
+
+      - name: Build Dockerfile
+        run: |
+          cat ${BUILDPACK}/support/build/_docker/${{ matrix.stack }}.Dockerfile > build/${{ matrix.stack }}.Dockerfile
+          cat docker/${{ matrix.stack }}.Dockerfile >> build/${{ matrix.stack }}.Dockerfile
+
+      - name: Docker build
+        run: docker build --pull --tag ${{ matrix.stack }} --file build/${{ matrix.stack }}.Dockerfile .
+
+      - name: Synchronize stable repository
+        shell: 'script -q -e -c "bash {0}"'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          echo "yes" | docker run --rm -i \
+            --env-file=${BUILDPACK}/support/build/_docker/env.default \
+            ${{ matrix.stack }} sync.sh $S3_BUCKET dist-${{ matrix.stack }}-stable/ $S3_BUCKET dist-${{ matrix.stack }}-develop/

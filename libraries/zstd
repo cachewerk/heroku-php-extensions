@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# fail hard
+set -o pipefail
+
+# fail harder
+set -eu
+
+util_dir=$(dirname $BASH_SOURCE)/../vendor/heroku/heroku-buildpack-php/support/build/_util
+
+source ${util_dir}/include/manifest.sh
+
+OUT_PREFIX=$1
+
+dep_formula=${0#$WORKSPACE_DIR/}
+dep_name=$(basename $BASH_SOURCE)
+dep_version=${dep_formula##*"/${dep_name}-"}
+dep_package=${dep_name}-${dep_version}
+dep_url=https://github.com/facebook/zstd/archive/v${dep_version}.tar.gz
+dep_manifest=${dep_package}.composer.json
+
+echo "-----> Building ${dep_package}..."
+
+curl -L ${dep_url} | tar xz
+pushd ${dep_package}
+make install -s PREFIX=${OUT_PREFIX}
+strip --strip-unneeded ${OUT_PREFIX}lib/libzstd*.so*
+popd
+
+ABI_VERSION=$(soname_version ${OUT_PREFIX}lib/libzstd.so)
+
+echo
+echo "ABI version is: ${ABI_VERSION}"
+echo
+
+python ${util_dir}/include/manifest.py "heroku-sys-library" "heroku-sys/${dep_name}" "$dep_version" "${dep_formula}.tar.gz" "{}" "{}" "{}" "{\"heroku-sys/${dep_name}-abi\":\"${ABI_VERSION}\"}" > $dep_manifest
+
+print_or_export_manifest_cmd "$(generate_manifest_cmd "$dep_manifest")"

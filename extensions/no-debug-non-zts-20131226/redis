@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+dep_name=$(basename $BASH_SOURCE)
+
+export PKG_CONFIG_PATH=/app/.heroku/php/lib/pkgconfig
+
+CONFIGURE_EXTRA="--enable-redis-igbinary --enable-redis-lzf --enable-redis-zstd --enable-redis-lz4 --with-liblz4=/usr/local"
+
+source $(dirname $BASH_SOURCE)/../../vendor/heroku/heroku-buildpack-php/support/build/extensions/pecl

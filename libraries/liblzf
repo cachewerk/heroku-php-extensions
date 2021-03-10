@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# fail hard
+set -o pipefail
+
+# fail harder
+set -eu
+
+util_dir=$(dirname $BASH_SOURCE)/../vendor/heroku/heroku-buildpack-php/support/build/_util
+
+source ${util_dir}/include/manifest.sh
+
+OUT_PREFIX=$1
+
+dep_formula=${0#$WORKSPACE_DIR/}
+dep_name=$(basename $BASH_SOURCE)
+dep_version=${dep_formula##*"/${dep_name}-"}
+dep_package=${dep_name}-${dep_version}
+dep_dirname=liblzf-${dep_version}
+dep_url=https://deb.debian.org/debian/pool/main/libl/liblzf/liblzf_${dep_version}.orig.tar.gz
+dep_manifest=${dep_package}.composer.json
+
+echo "-----> Building ${dep_package}..."
+
+curl -L ${dep_url} | tar xz
+pushd ${dep_dirname}
+./configure --disable-debug --disable-dependency-tracking --disable-silent-rules --prefix=${OUT_PREFIX}
+make -s
+make install -s
+popd
+
+python ${util_dir}/include/manifest.py "heroku-sys-library" "heroku-sys/${dep_name}" "$dep_version" "${dep_formula}.tar.gz" > $dep_manifest
+
+print_or_export_manifest_cmd "$(generate_manifest_cmd "$dep_manifest")"

@@ -1,0 +1,4 @@
+/build
+/vendor
+.env
+requirements.txt
