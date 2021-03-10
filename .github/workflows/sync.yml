@@ -30,12 +30,11 @@ jobs:
 
       - name: Build Dockerfile
         run: |
-          mkdir build
-          cat ${BUILDPACK}/support/build/_docker/${{ matrix.stack }}.Dockerfile > build/${{ matrix.stack }}.Dockerfile
-          cat docker/${{ matrix.stack }}.Dockerfile >> build/${{ matrix.stack }}.Dockerfile
+          cat ${BUILDPACK}/support/build/_docker/${{ matrix.stack }}.Dockerfile > docker/build/${{ matrix.stack }}.Dockerfile
+          cat docker/${{ matrix.stack }}.Dockerfile >> docker/build/${{ matrix.stack }}.Dockerfile
 
       - name: Docker build
-        run: docker build --pull --tag ${{ matrix.stack }} --file build/${{ matrix.stack }}.Dockerfile .
+        run: docker build --pull --tag ${{ matrix.stack }} --file docker/build/${{ matrix.stack }}.Dockerfile .
 
       - name: Synchronize stable repository
         shell: 'script -q -e -c "bash {0}"'

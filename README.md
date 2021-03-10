@@ -53,16 +53,15 @@ You must set the all variables in the `.env` file.
 ### Dockerfile
 
 ```
-mkdir build
-cat vendor/heroku/heroku-buildpack-php/support/build/_docker/heroku-20.Dockerfile > build/heroku-20.Dockerfile
-cat docker/heroku-20.Dockerfile >> build/heroku-20.Dockerfile
+cat vendor/heroku/heroku-buildpack-php/support/build/_docker/heroku-20.Dockerfile > docker/build/heroku-20.Dockerfile
+cat docker/heroku-20.Dockerfile >> docker/build/heroku-20.Dockerfile
 ```
 
 ### Build
 
 ```bash
 # Docker build
-docker build --pull --tag heroku-20 --file build/heroku-20.Dockerfile .
+docker build --pull --tag heroku-20 --file docker/build/heroku-20.Dockerfile .
 
 # Build libraries
 docker run --rm -ti --env-file=.env heroku-20 bob build --overwrite libraries/liblzf-3.6
