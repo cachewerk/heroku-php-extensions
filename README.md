@@ -30,6 +30,10 @@ composer require ext-redis:*
 # composer require ext-relay:*
 ```
 
+## Contributing
+
+Pull requests for additional Heroku stacks, PHP versions, additional extension versions and new extension are welcome.
+
 ## Development
 
 Before continuing, read and understand the [official build instructions](https://github.com/heroku/heroku-buildpack-php/blob/main/support/build/README.md).
