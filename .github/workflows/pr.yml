@@ -1,0 +1,76 @@
+
+name: Test builds
+
+on: pull_request
+
+jobs:
+
+  build:
+    name: Build extensions
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    env:
+      BUILDPACK: ./vendor/heroku/heroku-buildpack-php
+
+    strategy:
+      matrix:
+        stack:
+          - heroku-18
+          - heroku-20
+        series:
+          - 20180731 # PHP 7.3
+          - 20190902 # PHP 7.4
+          - 20200930 # PHP 8.0
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Composer Install
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Copy requirements
+        run: cp ${BUILDPACK}/requirements.txt .
+
+      - name: Build Dockerfile
+        run: |
+          cat ${BUILDPACK}/support/build/_docker/${{ matrix.stack }}.Dockerfile > docker/build/${{ matrix.stack }}.Dockerfile
+          cat docker/${{ matrix.stack }}.Dockerfile >> docker/build/${{ matrix.stack }}.Dockerfile
+
+      - name: Docker build
+        run: docker build --pull --tag ${{ matrix.stack }} --file docker/build/${{ matrix.stack }}.Dockerfile .
+
+      - name: Build liblzf library
+        shell: 'script -q -e -c "bash {0}"'
+        run: |
+          docker run --rm -ti \
+            ${{ matrix.stack }} bob build libraries/liblzf-3.6
+
+      - name: Build lz4 library
+        shell: 'script -q -e -c "bash {0}"'
+        run: |
+          docker run --rm -ti \
+            ${{ matrix.stack }} bob build libraries/lz4-1.9.3
+      
+      - name: Build zstd library
+        shell: 'script -q -e -c "bash {0}"'
+        run: |
+          docker run --rm -ti \
+            ${{ matrix.stack }} bob build libraries/zstd-1.4.9
+
+      - name: Build igbinary extension
+        shell: 'script -q -e -c "bash {0}"'
+        run: |
+          docker run --rm -ti \
+            --env UPSTREAM_S3_BUCKET=lang-php \
+            --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
+            ${{ matrix.stack }} bob build extensions/no-debug-non-zts-${{ matrix.series }}/igbinary-3.2.1
+
+      - name: Build redis extension
+        shell: 'script -q -e -c "bash {0}"'
+        run: |
+          docker run --rm -ti \
+            --env UPSTREAM_S3_BUCKET=lang-php \
+            --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
+            ${{ matrix.stack }} bob build extensions/no-debug-non-zts-${{ matrix.series }}/redis-5.3.3
