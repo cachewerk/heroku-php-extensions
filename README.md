@@ -8,7 +8,7 @@ Pre-built PHP extensions for Heroku that are not included or fully supported by 
 
 The supported PHP versions are `7.3`, `7.4` and `8.0` on the `heroku-18` and `heroku-20` stacks.
 
-You can [browse the S3 bucket](https://s3.us-east-1.amazonaws.com/heroku-php-extensions/index.html) and checkout the [demo app](https://php-extensions.herokuapp.com).
+Checkout the [demo app](https://php-extensions.herokuapp.com), or [browse the S3 bucket](https://s3.us-east-1.amazonaws.com/heroku-php-extensions/index.html).
 
 ## Usage
 
