@@ -8,9 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - Overhauled demo app
-- Only build on `push` to `main` branch
-- Sync repos when a release is published
+- Only build on push to `main` branch
 - Make repos after successful build workflow
+- Sync repos when a release is published
+- Run builds for pull requests
 
 ## [1.0.0] - 2021-03-10
 ### Added
