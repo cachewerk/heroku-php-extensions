@@ -1,20 +1,18 @@
 
-name: Build extensions
+name: Test PR builds
 
-on:
-  push:
-    branches:
-      - main
+on: pull_request
 
 jobs:
 
   build:
-    name: Build and deploy
+    name: Test building
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
     env:
       S3_BUCKET: heroku-php-extensions
+      S3_PREFIX: pull-requests/${{ github.event.number }}/
       BUILDPACK: ./vendor/heroku/heroku-buildpack-php
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -75,8 +73,7 @@ jobs:
             --env UPSTREAM_S3_BUCKET=lang-php \
             --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
             --env-file=${BUILDPACK}/support/build/_docker/env.default \
-            ${{ matrix.stack }} deploy.sh --overwrite \
-            extensions/no-debug-non-zts-${{ matrix.series }}/igbinary-3.2.1
+            ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/igbinary-3.2.1
 
       - name: Build redis extension
         shell: 'script -q -e -c "bash {0}"'
@@ -85,5 +82,4 @@ jobs:
             --env UPSTREAM_S3_BUCKET=lang-php \
             --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
             --env-file=${BUILDPACK}/support/build/_docker/env.default \
-            ${{ matrix.stack }} deploy.sh --overwrite \
-            extensions/no-debug-non-zts-${{ matrix.series }}/redis-5.3.3
+            ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/redis-5.3.3
