@@ -1,7 +1,10 @@
 
 name: Test builds
 
-on: pull_request
+on:
+  pull_request:
+    branches:
+      - 'feature/**'
 
 jobs:
 
