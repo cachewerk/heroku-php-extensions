@@ -9,7 +9,7 @@ on:
 jobs:
 
   build:
-    name: Build extensions
+    name: Build and deploy
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -60,7 +60,7 @@ jobs:
           docker run --rm -ti \
             --env-file=${BUILDPACK}/support/build/_docker/env.default \
             ${{ matrix.stack }} deploy.sh --overwrite libraries/lz4-1.9.3
-      
+
       - name: Build zstd library
         shell: 'script -q -e -c "bash {0}"'
         run: |
