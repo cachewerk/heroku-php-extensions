@@ -20,6 +20,9 @@ heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://heroku-php-extension
 
 # heroku-20
 heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://heroku-php-extensions.s3.amazonaws.com/dist-heroku-20-stable/"
+
+# alternative mirror combining heroku-18/20
+heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://relaycache.com/heroku/"
 ```
 
 Next, add any of the extensions to `composer.json` as you usually would:
