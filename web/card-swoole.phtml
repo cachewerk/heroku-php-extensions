@@ -28,7 +28,7 @@
       </div>
 
       <?php if (extension_loaded('swoole')) : ?>
-        <?php $swoole = (new ReflectionExtension('swoole'))->info(); ?>
+        <?php $swoole = shell_exec('php --ri swoole'); ?>
 
         <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
           <dt class="text-sm font-medium text-gray-500">
