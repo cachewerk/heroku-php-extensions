@@ -3,7 +3,8 @@
 Pre-built PHP extensions for Heroku that are not included or fully supported by the official [PHP buildpack](https://github.com/heroku/heroku-buildpack-php).
 
 - [igbinary](https://pecl.php.net/package/igbinary)
-- [PhpRedis](https://pecl.php.net/package/redis) (with _lzf, lz4, zstd and igbinary_ support)
+- [PhpRedis](https://pecl.php.net/package/redis) (with _igbinary_, _lzf_, _lz4_ and _zstd_ support)
+- [Swoole](https://pecl.php.net/package/swoole)
 - [Relay](https://relaycache.com) _(coming soon)_
 
 The supported PHP versions are `7.3`, `7.4` and `8.0` on the `heroku-18` and `heroku-20` stacks.
