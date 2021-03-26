@@ -3,7 +3,8 @@
 Pre-built PHP extensions for Heroku that are not included or fully supported by the official [PHP buildpack](https://github.com/heroku/heroku-buildpack-php).
 
 - [igbinary](https://pecl.php.net/package/igbinary)
-- [PhpRedis](https://pecl.php.net/package/redis) (with _lzf, lz4, zstd and igbinary_ support)
+- [PhpRedis](https://pecl.php.net/package/redis) (with _igbinary_, _lzf_, _lz4_ and _zstd_ support)
+- [Swoole](https://pecl.php.net/package/swoole)
 - [Relay](https://relaycache.com) _(coming soon)_
 
 The supported PHP versions are `7.3`, `7.4` and `8.0` on the `heroku-18` and `heroku-20` stacks.
@@ -12,7 +13,13 @@ Checkout the [demo app](https://php-extensions.herokuapp.com), or [browse the S3
 
 ## Usage
 
-First, find out your app’s stack by running `heroku info`, then add the corresponding repository to your application:
+Add the platform repository to your Heroku app:
+
+```bash
+heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://relaycache.com/heroku/"
+```
+
+If you prefer using the AWS S3 repositories, add the corresponding repository to your Heroku app:
 
 ```bash
 # heroku-18
@@ -20,9 +27,6 @@ heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://heroku-php-extension
 
 # heroku-20
 heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://heroku-php-extensions.s3.amazonaws.com/dist-heroku-20-stable/"
-
-# alternative mirror combining heroku-18/20
-heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://relaycache.com/heroku/"
 ```
 
 Next, add any of the extensions to `composer.json` as you usually would:
@@ -30,6 +34,7 @@ Next, add any of the extensions to `composer.json` as you usually would:
 ```bash
 composer require "ext-igbinary:*"
 composer require "ext-redis:*"
+composer require "ext-swoole:*"
 # composer require "ext-relay:*"
 ```
 
@@ -81,4 +86,7 @@ docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-
 
 # Build phpredis
 docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/redis-5.3.3
+
+# Build swoole
+docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/swoole-4.6.4
 ```

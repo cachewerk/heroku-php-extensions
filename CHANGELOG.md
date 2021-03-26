@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
+- Added support for [Swoole](https://github.com/swoole/swoole-src)
 - Overhauled demo app
 - Only build on push to `main` branch
 - Make repos after successful build workflow
