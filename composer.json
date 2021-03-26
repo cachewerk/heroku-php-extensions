@@ -5,7 +5,8 @@
     "require": {
         "php": "^8.0",
         "ext-igbinary": "*",
-        "ext-redis": "*"
+        "ext-redis": "*",
+        "ext-swoole": "*"
     },
     "require-dev": {
         "heroku/heroku-buildpack-php": "dev-main"
