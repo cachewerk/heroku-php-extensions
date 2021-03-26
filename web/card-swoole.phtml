@@ -26,6 +26,52 @@
           <?php echo phpversion('swoole'); ?>
         </dd>
       </div>
+
+      <?php if (extension_loaded('swoole')) : ?>
+        <?php $swoole = (new ReflectionExtension('swoole'))->info(); ?>
+
+        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">
+            JSON support
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <?php preg_match("/^json => (.+)/m", $swoole, $json); echo $json[1]; ?>
+          </dd>
+        </div>
+        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">
+            HTTP2 support
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <?php preg_match("/^http2 => (.+)/m", $swoole, $http2); echo $http2[1]; ?>
+          </dd>
+        </div>
+        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">
+            OpenSSL support
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <?php preg_match("/^openssl => (.+)/m", $swoole, $openssl); echo $openssl[1]; ?>
+          </dd>
+        </div>
+        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">
+            Native cURL support
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <?php preg_match("/^curl-native => (.+)/m", $swoole, $curl); echo $curl[1]; ?>
+          </dd>
+        </div>
+        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">
+            mysqlnd support
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <?php preg_match("/^mysqlnd => (.+)/m", $swoole, $mysqlnd); echo $mysqlnd[1]; ?>
+          </dd>
+        </div>
+      <?php endif; ?>
+
     </dl>
   </div>
 </section>
