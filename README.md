@@ -88,5 +88,5 @@ docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-
 docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/redis-5.3.3
 
 # Build swoole
-docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/swoole-4.6.4
+docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/swoole-4.6.6
 ```

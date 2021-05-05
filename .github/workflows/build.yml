@@ -96,4 +96,4 @@ jobs:
             --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
             --env-file=${BUILDPACK}/support/build/_docker/env.default \
             ${{ matrix.stack }} deploy.sh --overwrite \
-            extensions/no-debug-non-zts-${{ matrix.series }}/swoole-4.6.4
+            extensions/no-debug-non-zts-${{ matrix.series }}/swoole-4.6.6
