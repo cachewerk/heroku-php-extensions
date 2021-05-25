@@ -84,6 +84,9 @@ docker run --rm -ti --env-file=.env heroku-20 bob build --overwrite libraries/zs
 # Build igbinary
 docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/igbinary-3.2.1
 
+# Build msgpack
+docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/igbinary-3.2.1
+
 # Build phpredis
 docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/redis-5.3.3
 
