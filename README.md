@@ -2,10 +2,11 @@
 
 Pre-built PHP extensions for Heroku that are not included or fully supported by the official [PHP buildpack](https://github.com/heroku/heroku-buildpack-php).
 
-- [igbinary](https://pecl.php.net/package/igbinary)
+- [Relay](https://relaycache.com)
 - [PhpRedis](https://pecl.php.net/package/redis) (with _igbinary_, _lzf_, _lz4_ and _zstd_ support)
 - [Swoole](https://pecl.php.net/package/swoole)
-- [Relay](https://relaycache.com) _(coming soon)_
+- [MessagePack](https://github.com/msgpack/msgpack-php)
+- [igbinary](https://pecl.php.net/package/igbinary)
 
 The supported PHP versions are `7.3`, `7.4` and `8.0` on the `heroku-18` and `heroku-20` stacks.
 
@@ -85,7 +86,7 @@ docker run --rm -ti --env-file=.env heroku-20 bob build --overwrite libraries/zs
 docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/igbinary-3.2.1
 
 # Build msgpack
-docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/igbinary-3.2.1
+docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/msgpack-2.1.2
 
 # Build phpredis
 docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/redis-5.3.3
