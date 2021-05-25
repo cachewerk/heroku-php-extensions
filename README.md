@@ -34,8 +34,8 @@ Next, add any of the extensions to `composer.json` as you usually would:
 ```bash
 composer require "ext-igbinary:*"
 composer require "ext-redis:*"
+composer require "ext-relay:*"
 composer require "ext-swoole:*"
-# composer require "ext-relay:*"
 ```
 
 ## Contributing
@@ -86,6 +86,9 @@ docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-
 
 # Build phpredis
 docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/redis-5.3.3
+
+# Build relay
+docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/relay-0.1.0
 
 # Build swoole
 docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/swoole-4.6.6

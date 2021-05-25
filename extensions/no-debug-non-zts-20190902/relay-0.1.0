@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Build Path: /app/.heroku/php
+# Build Deps: php-7.4.*, libraries/liblzf-*, libraries/lz4-*, libraries/zstd-*, extensions/no-debug-non-zts-20190902/igbinary-*
+
+source $(dirname $0)/../no-debug-non-zts-20131226/relay
