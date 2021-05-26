@@ -16,9 +16,9 @@ dep_name=relay
 dep_formula=${0#$WORKSPACE_DIR/}
 dep_version=${dep_formula##*"/${dep_name}-"}
 dep_package=ext-${dep_name}-${dep_version}
-dep_dirname=relay-dev-php${series}-debian-x86-64
+dep_dirname=relay-v${dep_version}-php${series}-debian-x86-64
 dep_archive_name=${dep_dirname}.tar.gz
-dep_url=https://cachewerk.s3.amazonaws.com/relay/develop/${dep_archive_name}
+dep_url=https://cachewerk.s3.amazonaws.com/relay/v${dep_version}/${dep_archive_name}
 dep_manifest=${dep_package}_php-${series}.composer.json
 
 echo "-----> Building ${dep_package}..."
