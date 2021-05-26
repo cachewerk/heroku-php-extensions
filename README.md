@@ -33,10 +33,11 @@ heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://heroku-php-extension
 Next, add any of the extensions to `composer.json` as you usually would:
 
 ```bash
-composer require "ext-igbinary:*"
-composer require "ext-redis:*"
 composer require "ext-relay:*"
+composer require "ext-redis:*"
 composer require "ext-swoole:*"
+composer require "ext-msgpack:*"
+composer require "ext-igbinary:*"
 ```
 
 ## Contributing
