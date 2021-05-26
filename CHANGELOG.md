@@ -6,8 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [1.2.0] - 2021-05-26
-- Added Relay v0.1.0
-- Added MessagePack v2.1.2
+- Added [Relay](https://relaycache.com) v0.1.0
+- Added [MessagePack](https://github.com/msgpack/msgpack-php) v2.1.2
 - Updated Swoole to v4.6.7
 - Updated PhpRedis to v5.3.4
 - Updated igbinary to v3.2.2
