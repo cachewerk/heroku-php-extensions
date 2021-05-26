@@ -75,6 +75,15 @@ jobs:
             --env-file=${BUILDPACK}/support/build/_docker/env.default \
             ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/igbinary-3.2.1
 
+      - name: Build msgpack extension
+        shell: 'script -q -e -c "bash {0}"'
+        run: |
+          docker run --rm -ti \
+            --env UPSTREAM_S3_BUCKET=lang-php \
+            --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
+            --env-file=${BUILDPACK}/support/build/_docker/env.default \
+            ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/msgpack-2.1.2
+
       - name: Build redis extension
         shell: 'script -q -e -c "bash {0}"'
         run: |
@@ -83,6 +92,16 @@ jobs:
             --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
             --env-file=${BUILDPACK}/support/build/_docker/env.default \
             ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/redis-5.3.3
+
+      - name: Build relay extension
+        shell: 'script -q -e -c "bash {0}"'
+        if: matrix.series != '20180731'
+        run: |
+          docker run --rm -ti \
+            --env UPSTREAM_S3_BUCKET=lang-php \
+            --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
+            --env-file=${BUILDPACK}/support/build/_docker/env.default \
+            ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/relay-0.1.0
 
       - name: Build swoole extension
         shell: 'script -q -e -c "bash {0}"'

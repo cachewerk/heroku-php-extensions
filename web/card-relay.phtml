@@ -1,0 +1,63 @@
+
+<section class="max-w-2xl mx-auto">
+  <div>
+    <h3 class="text-lg leading-6 font-medium text-gray-900">
+      ext-relay
+    </h3>
+    <p class="mt-1 max-w-2xl text-sm text-gray-500">
+      Details about the <a href="https://github.com/cachewerk/relay" class="text-indigo-600 hover:underline">Relay</a> extension.
+    </p>
+  </div>
+  <div class="mt-5 border-t border-gray-200">
+    <dl class="sm:divide-y sm:divide-gray-200">
+      <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+        <dt class="text-sm font-medium text-gray-500">
+          Extension loaded
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <?php echo extension_loaded('relay') ? 'Yes' : 'No'; ?>
+        </dd>
+      </div>
+      <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+        <dt class="text-sm font-medium text-gray-500">
+          Extension version
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <?php echo phpversion('relay'); ?>
+        </dd>
+      </div>
+      <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+        <dt class="text-sm font-medium text-gray-500">
+          igbinary support
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <?php echo defined('Relay\Relay::SERIALIZER_IGBINARY') ? 'Yes' : 'No'; ?>
+        </dd>
+      </div>
+      <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+        <dt class="text-sm font-medium text-gray-500">
+          lzf support
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <?php echo defined('Relay\Relay::COMPRESSION_LZF') ? 'Yes' : 'No'; ?>
+        </dd>
+      </div>
+      <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+        <dt class="text-sm font-medium text-gray-500">
+          lz4 support
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <?php echo defined('Relay\Relay::COMPRESSION_LZ4') ? 'Yes' : 'No'; ?>
+        </dd>
+      </div>
+      <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+        <dt class="text-sm font-medium text-gray-500">
+          zstd support
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <?php echo defined('Relay\Relay::COMPRESSION_ZSTD') ? 'Yes' : 'No'; ?>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</section>
