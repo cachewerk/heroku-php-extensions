@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "faac5150e5a28e539816aa3fd8e7f98f",
+    "content-hash": "6be27eb8c806af318db79c9afee055af",
     "packages": [],
     "packages-dev": [
         {
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "3e49045a63ed480378c9d3d3e364acbfcc06eb3f"
+                "reference": "360fa3ee3caad234760048da8bc8fefd35609ea9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/3e49045a63ed480378c9d3d3e364acbfcc06eb3f",
-                "reference": "3e49045a63ed480378c9d3d3e364acbfcc06eb3f",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/360fa3ee3caad234760048da8bc8fefd35609ea9",
+                "reference": "360fa3ee3caad234760048da8bc8fefd35609ea9",
                 "shasum": ""
             },
             "default-branch": true,
@@ -49,9 +49,9 @@
             ],
             "support": {
                 "issues": "https://github.com/heroku/heroku-buildpack-php/issues",
-                "source": "https://github.com/heroku/heroku-buildpack-php/tree/v190"
+                "source": "https://github.com/heroku/heroku-buildpack-php/tree/v192"
             },
-            "time": "2021-03-04T23:15:04+00:00"
+            "time": "2021-05-06T16:53:55+00:00"
         }
     ],
     "aliases": [],
@@ -64,7 +64,9 @@
     "platform": {
         "php": "^8.0",
         "ext-igbinary": "*",
+        "ext-msgpack": "*",
         "ext-redis": "*",
+        "ext-relay": "*",
         "ext-swoole": "*"
     },
     "platform-dev": [],

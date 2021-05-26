@@ -5,7 +5,9 @@
     "require": {
         "php": "^8.0",
         "ext-igbinary": "*",
+        "ext-msgpack": "*",
         "ext-redis": "*",
+        "ext-relay": "*",
         "ext-swoole": "*"
     },
     "require-dev": {
