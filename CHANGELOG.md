@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Added Relay v0.1.0
 - Added MessagePack v2.1.2
+- Updated Swoole to v4.6.7
+- Updated PhpRedis to v5.3.4
+- Updated igbinary to v3.2.2
 
 ## [1.1.1] - 2021-05-05
 - Updated Swoole to v4.6.4
