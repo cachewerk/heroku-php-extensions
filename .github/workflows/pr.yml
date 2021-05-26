@@ -95,7 +95,7 @@ jobs:
 
       - name: Build relay extension
         shell: 'script -q -e -c "bash {0}"'
-        if: ${{ matrix.series }} != '20180731'
+        if: matrix.series != '20180731'
         run: |
           docker run --rm -ti \
             --env UPSTREAM_S3_BUCKET=lang-php \
