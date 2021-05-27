@@ -40,6 +40,10 @@ composer require "ext-msgpack:*"
 composer require "ext-igbinary:*"
 ```
 
+## Troubleshooting
+
+See [TROUBLESHOOTING.md](TROUBLESHOOTING.md).
+
 ## Contributing
 
 Pull requests for additional Heroku stacks, PHP versions, additional extension versions and new extension are welcome.
