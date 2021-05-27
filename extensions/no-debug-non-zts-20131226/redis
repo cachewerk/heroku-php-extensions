@@ -2,6 +2,9 @@
 
 dep_name=$(basename $BASH_SOURCE)
 
+echo $PATH
+find /app -name 'php-config'
+
 series=$($OUT_PREFIX/bin/php-config --version | cut -d. -f1,2)
 
 export PKG_CONFIG_PATH=/app/.heroku/php/lib/pkgconfig
