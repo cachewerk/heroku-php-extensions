@@ -33,7 +33,7 @@ mkdir -p ${php_ext_dir}
 mv relay-static.so ${php_ext_dir}/relay.so
 popd
 
-MANIFEST_REQUIRE="${MANIFEST_REQUIRE:-"{\"heroku-sys/php\":\"${series}.*\"}"}"
+MANIFEST_REQUIRE="${MANIFEST_REQUIRE:-"{\"heroku-sys/php\":\"${series}.*\",\"heroku-sys/liblzf\":\"*\",\"heroku-sys/lz4\":\"*\",\"heroku-sys/zstd\":\"*\",\"heroku-sys/ext-json\":\"*\",\"heroku-sys/ext-igbinary\":\"*\",\"heroku-sys/ext-msgpack\":\"*\"}"}"
 MANIFEST_CONFLICT="${MANIFEST_CONFLICT:-"{}"}"
 MANIFEST_REPLACE="${MANIFEST_REPLACE:-"{}"}"
 MANIFEST_PROVIDE="${MANIFEST_PROVIDE:-"{}"}"
