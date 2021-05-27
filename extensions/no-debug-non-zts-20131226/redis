@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 dep_name=$(basename $BASH_SOURCE)
-series=$(php-config --version | cut -d. -f1,2)
+
+series=$($OUT_PREFIX/bin/php-config --version | cut -d. -f1,2)
 
 export PKG_CONFIG_PATH=/app/.heroku/php/lib/pkgconfig
 
