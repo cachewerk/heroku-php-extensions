@@ -2,8 +2,12 @@
 
 dep_name=$(basename $BASH_SOURCE)
 
+series=$(/app/.heroku/php/bin/php-config --version | cut -d. -f1,2)
+
 export PKG_CONFIG_PATH=/app/.heroku/php/lib/pkgconfig
 
-CONFIGURE_EXTRA="--enable-redis-igbinary --enable-redis-lzf --enable-redis-zstd --enable-redis-lz4 --with-liblz4=/usr/local"
+CONFIGURE_EXTRA="--enable-redis-igbinary --enable-redis-msgpack --enable-redis-lzf --enable-redis-zstd --enable-redis-lz4 --with-liblz4=/usr/local"
+
+MANIFEST_REQUIRE="${MANIFEST_REQUIRE:-"{\"heroku-sys/php\":\"${series}.*\",\"heroku-sys/liblzf\":\"*\",\"heroku-sys/lz4\":\"*\",\"heroku-sys/zstd\":\"*\",\"heroku-sys/ext-json\":\"*\",\"heroku-sys/ext-igbinary\":\"*\",\"heroku-sys/ext-msgpack\":\"*\"}"}"
 
 source $(dirname $BASH_SOURCE)/../../vendor/heroku/heroku-buildpack-php/support/build/extensions/pecl
