@@ -27,17 +27,22 @@ curl -L ${dep_url} | tar xz
 
 pushd ${dep_dirname}
 rm -rf ${OUT_PREFIX}/*
+
 uuid=$(cat /proc/sys/kernel/random/uuid)
 sed -i "s/31415926-5358-9793-2384-626433832795/${uuid}/" relay-static.so
+
 mkdir -p ${php_ext_dir}
-mv relay-static.so ${php_ext_dir}/relay.so
+cp relay-static.so ${php_ext_dir}/relay.so
+
+mkdir -p ${OUT_PREFIX}/etc/php/conf.d
+cp relay.ini ${OUT_PREFIX}/etc/php/conf.d/relay.ini-dist
 popd
 
 MANIFEST_REQUIRE="${MANIFEST_REQUIRE:-"{\"heroku-sys/php\":\"${series}.*\",\"heroku-sys/liblzf\":\"*\",\"heroku-sys/lz4\":\"*\",\"heroku-sys/zstd\":\"*\",\"heroku-sys/ext-json\":\"*\",\"heroku-sys/ext-igbinary\":\"*\",\"heroku-sys/ext-msgpack\":\"*\"}"}"
 MANIFEST_CONFLICT="${MANIFEST_CONFLICT:-"{}"}"
 MANIFEST_REPLACE="${MANIFEST_REPLACE:-"{}"}"
 MANIFEST_PROVIDE="${MANIFEST_PROVIDE:-"{}"}"
-MANIFEST_EXTRA="${MANIFEST_EXTRA:-"{}"}"
+MANIFEST_EXTRA="${MANIFEST_EXTRA:-"{\"config\":\"etc/php/conf.d/relay.ini-dist\"}"}"
 
 python $(dirname $BASH_SOURCE)/../../vendor/heroku/heroku-buildpack-php/support/build/_util/include/manifest.py "heroku-sys-php-extension" "heroku-sys/ext-${dep_name}" "$dep_version" "${dep_formula}.tar.gz" "$MANIFEST_REQUIRE" "$MANIFEST_CONFLICT" "$MANIFEST_REPLACE" "$MANIFEST_PROVIDE" "$MANIFEST_EXTRA" > $dep_manifest
 
