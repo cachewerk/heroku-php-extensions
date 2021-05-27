@@ -2,6 +2,7 @@
     "name": "cachewerk/heroku-php-extensions",
     "description": "Pre-built PHP extensions for Heroku.",
     "type": "library",
+    "license": "MIT",
     "require": {
         "php": "^8.0",
         "ext-igbinary": "*",
