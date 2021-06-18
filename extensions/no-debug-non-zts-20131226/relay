@@ -28,11 +28,14 @@ curl -L ${dep_url} | tar xz
 pushd ${dep_dirname}
 rm -rf ${OUT_PREFIX}/*
 
+mv relay-pkg.so relay.so
+chmod 700 relay.so
+
 uuid=$(cat /proc/sys/kernel/random/uuid)
-sed -i "s/31415926-5358-9793-2384-626433832795/${uuid}/" relay-static.so
+sed -i "s/31415926-5358-9793-2384-626433832795/${uuid}/" relay.so
 
 mkdir -p ${php_ext_dir}
-cp relay-static.so ${php_ext_dir}/relay.so
+cp relay.so ${php_ext_dir}
 
 mkdir -p ${OUT_PREFIX}/etc/php/conf.d
 cp relay.ini ${OUT_PREFIX}/etc/php/conf.d/relay.ini-dist
