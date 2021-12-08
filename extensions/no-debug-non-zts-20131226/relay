@@ -32,7 +32,7 @@ mv relay-pkg.so relay.so
 chmod 700 relay.so
 
 uuid=$(cat /proc/sys/kernel/random/uuid)
-sed -i "s/31415926-5358-9793-2384-626433832795/${uuid}/" relay.so
+sed -i "s/BIN:31415926-5358-9793-2384-626433832795/BIN:${uuid}/" relay.so
 
 mkdir -p ${php_ext_dir}
 cp relay.so ${php_ext_dir}
