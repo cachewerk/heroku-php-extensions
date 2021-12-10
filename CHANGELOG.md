@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Added [PHP 8.1](https://devcenter.heroku.com/changelog-items/2304) builds
 - Updated [Relay](https://relaycache.com) to v0.2.1
+- Updated Swoole to v4.8.3
 
 ## [1.2.3] - 2021-10-26
 - Updated [Relay](https://relaycache.com) to v0.2.0
