@@ -1,5 +1,14 @@
 # Troubleshooting
 
+## Outdated versions installed during deployment
+
+If your deploy is installing older/outdated versions, you may need to purge your Heroku repo:
+
+```bash
+heroku plugins:install heroku-repo
+heroku repo:purge_cache -a my-app
+```
+
 ## Segmentation fault during build
 
 Should you encounter a segfault during builds: 
