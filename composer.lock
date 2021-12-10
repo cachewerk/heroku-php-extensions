@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "360fa3ee3caad234760048da8bc8fefd35609ea9"
+                "reference": "dd40b82aaf9c44b2fa64f395d3ed2a363aa8d34b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/360fa3ee3caad234760048da8bc8fefd35609ea9",
-                "reference": "360fa3ee3caad234760048da8bc8fefd35609ea9",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/dd40b82aaf9c44b2fa64f395d3ed2a363aa8d34b",
+                "reference": "dd40b82aaf9c44b2fa64f395d3ed2a363aa8d34b",
                 "shasum": ""
             },
             "default-branch": true,
@@ -49,9 +49,9 @@
             ],
             "support": {
                 "issues": "https://github.com/heroku/heroku-buildpack-php/issues",
-                "source": "https://github.com/heroku/heroku-buildpack-php/tree/v192"
+                "source": "https://github.com/heroku/heroku-buildpack-php/tree/main"
             },
-            "time": "2021-05-06T16:53:55+00:00"
+            "time": "2021-12-10T16:59:36+00:00"
         }
     ],
     "aliases": [],
@@ -70,5 +70,5 @@
         "ext-swoole": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
