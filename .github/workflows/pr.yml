@@ -74,7 +74,7 @@ jobs:
             --env UPSTREAM_S3_BUCKET=lang-php \
             --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
             --env-file=${BUILDPACK}/support/build/_docker/env.default \
-            ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/igbinary-3.2.6
+            ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/igbinary-3.2.7
 
       - name: Build msgpack extension
         shell: 'script -q -e -c "bash {0}"'
@@ -92,7 +92,7 @@ jobs:
             --env UPSTREAM_S3_BUCKET=lang-php \
             --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
             --env-file=${BUILDPACK}/support/build/_docker/env.default \
-            ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/redis-5.3.4
+            ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/redis-5.3.5
 
       - name: Build relay extension
         shell: 'script -q -e -c "bash {0}"'
@@ -111,7 +111,7 @@ jobs:
             --env UPSTREAM_S3_BUCKET=lang-php \
             --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
             --env-file=${BUILDPACK}/support/build/_docker/env.default \
-            ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/swoole-4.8.3
+            ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/swoole-4.8.6
 
   mkrepo:
     name: Make repository

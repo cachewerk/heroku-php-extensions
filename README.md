@@ -88,17 +88,17 @@ docker run --rm -ti --env-file=.env heroku-20 bob build --overwrite libraries/lz
 docker run --rm -ti --env-file=.env heroku-20 bob build --overwrite libraries/zstd-1.4.9
 
 # Build igbinary
-docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/igbinary-3.2.6
+docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/igbinary-3.2.7
 
 # Build msgpack
 docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/msgpack-2.1.2
 
 # Build phpredis
-docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/redis-5.3.4
+docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/redis-5.3.5
 
 # Build relay
 docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/relay-0.2.2
 
 # Build swoole
-docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/swoole-4.8.3
+docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/swoole-4.8.6
 ```
