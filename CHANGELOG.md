@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - Updated [Relay](https://github.com/cachewerk) to v0.3.0
+- Updated PhpRedis to v5.3.7
 - Updated Swoole to v4.10.0
 
 ## [1.2.5] - 2022-01-14

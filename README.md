@@ -94,7 +94,7 @@ docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-
 docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/msgpack-2.1.2
 
 # Build phpredis
-docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/redis-5.3.5
+docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/redis-5.3.7
 
 # Build relay
 docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/relay-0.3.0
