@@ -17,7 +17,7 @@ Checkout the [demo app](https://php-extensions.herokuapp.com), or [browse the S3
 Add the platform repository to your Heroku app:
 
 ```bash
-heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://relaycache.com/heroku/"
+heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://relay.so/heroku/"
 ```
 
 If you prefer using the AWS S3 repositories, add the corresponding repository to your Heroku app:
