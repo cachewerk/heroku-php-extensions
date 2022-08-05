@@ -102,7 +102,7 @@ jobs:
             --env UPSTREAM_S3_BUCKET=lang-php \
             --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
             --env-file=${BUILDPACK}/support/build/_docker/env.default \
-            ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/relay-0.4.1
+            ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/relay-0.4.4
 
       - name: Build swoole extension
         shell: 'script -q -e -c "bash {0}"'
