@@ -26,9 +26,12 @@ jobs:
           - heroku-20
           - heroku-22
         series:
+          - 20180731 # PHP 7.3
           - 20190902 # PHP 7.4
           - 20200930 # PHP 8.0
           - 20210902 # PHP 8.1
+
+    if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
 
     steps:
       - name: Checkout
@@ -100,8 +103,8 @@ jobs:
             extensions/no-debug-non-zts-${{ matrix.series }}/redis-5.3.7
 
       - name: Build relay extension
+        if: matrix.series != 20180731
         shell: 'script -q -e -c "bash {0}"'
-        if: matrix.series != '20180731'
         run: |
           docker run --rm -ti \
             --env UPSTREAM_S3_BUCKET=lang-php \
