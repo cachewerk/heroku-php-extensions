@@ -9,7 +9,8 @@
         "ext-msgpack": "*",
         "ext-redis": "*",
         "ext-relay": "*",
-        "ext-swoole": "*"
+        "ext-swoole": "*",
+        "ext-openswoole": "*"
     },
     "require-dev": {
         "heroku/heroku-buildpack-php": "dev-main"
