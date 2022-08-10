@@ -24,6 +24,7 @@ jobs:
         stack:
           - heroku-18
           - heroku-20
+          - heroku-22
         series:
           - 20180731 # PHP 7.3
           - 20190902 # PHP 7.4

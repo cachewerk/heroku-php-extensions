@@ -8,7 +8,7 @@ Pre-built PHP extensions for Heroku that are not included or fully supported by 
 - [MessagePack](https://pecl.php.net/package/msgpack)
 - [igbinary](https://pecl.php.net/package/igbinary)
 
-The supported PHP versions are `7.3`, `7.4`, `8.0` and `8.1` on the `heroku-18` and `heroku-20` stacks.
+The supported PHP versions are `7.3`, `7.4`, `8.0` and `8.1` on the `heroku-18`, `heroku-20`, and `heroku-22` stacks.
 
 Checkout the [demo app](https://php-extensions.herokuapp.com), or [browse the S3 bucket](https://s3.us-east-1.amazonaws.com/heroku-php-extensions/index.html).
 
@@ -28,6 +28,9 @@ heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://heroku-php-extension
 
 # heroku-20
 heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://heroku-php-extensions.s3.amazonaws.com/dist-heroku-20-stable/"
+
+# heroku-22
+heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://heroku-php-extensions.s3.amazonaws.com/dist-heroku-22-stable/"
 ```
 
 Next, add any of the extensions to `composer.json` as you usually would:
@@ -69,36 +72,36 @@ Be sure to set all variables in your newly created `.env` file.
 
 ### Dockerfile
 
-Create a custom Dockerfile for `heroku-20`.
+Create a custom Dockerfile for `heroku-22`.
 
 ```
-cat vendor/heroku/heroku-buildpack-php/support/build/_docker/heroku-20.Dockerfile > docker/build/heroku-20.Dockerfile
-cat docker/heroku-20.Dockerfile >> docker/build/heroku-20.Dockerfile
+cat vendor/heroku/heroku-buildpack-php/support/build/_docker/heroku-22.Dockerfile > docker/build/heroku-22.Dockerfile
+cat docker/heroku-22.Dockerfile >> docker/build/heroku-22.Dockerfile
 ```
 
 ### Build
 
 ```bash
 # Docker build
-docker build --pull --tag heroku-20 --file docker/build/heroku-20.Dockerfile .
+docker build --pull --tag heroku-22 --file docker/build/heroku-22.Dockerfile .
 
 # Build libraries
-docker run --rm -ti --env-file=.env heroku-20 bob build --overwrite libraries/liblzf-3.6
-docker run --rm -ti --env-file=.env heroku-20 bob build --overwrite libraries/lz4-1.9.3
-docker run --rm -ti --env-file=.env heroku-20 bob build --overwrite libraries/zstd-1.4.9
+docker run --rm -ti --env-file=.env heroku-22 bob build --overwrite libraries/liblzf-3.6
+docker run --rm -ti --env-file=.env heroku-22 bob build --overwrite libraries/lz4-1.9.3
+docker run --rm -ti --env-file=.env heroku-22 bob build --overwrite libraries/zstd-1.4.9
 
 # Build igbinary
-docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/igbinary-3.2.7
+docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20200930/igbinary-3.2.7
 
 # Build msgpack
-docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/msgpack-2.1.2
+docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20200930/msgpack-2.1.2
 
 # Build phpredis
-docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/redis-5.3.7
+docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20200930/redis-5.3.7
 
 # Build relay
-docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/relay-0.4.4
+docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20200930/relay-0.4.4
 
 # Build swoole
-docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/swoole-4.11.1
+docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20200930/swoole-4.11.1
 ```
