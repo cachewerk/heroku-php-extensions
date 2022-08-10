@@ -123,7 +123,7 @@ jobs:
             --env UPSTREAM_S3_BUCKET=lang-php \
             --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
             --env-file=${BUILDPACK}/support/build/_docker/env.default \
-            ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/swoole-4.8.11
+            ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/swoole-5.0.0
 
       - name: Build openswoole extension
         if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
