@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6be27eb8c806af318db79c9afee055af",
+    "content-hash": "119cc6f8341e81de2cdb7c1a45dbf302",
     "packages": [],
     "packages-dev": [
         {
@@ -67,8 +67,9 @@
         "ext-msgpack": "*",
         "ext-redis": "*",
         "ext-relay": "*",
-        "ext-swoole": "*"
+        "ext-swoole": "*",
+        "ext-openswoole": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }
