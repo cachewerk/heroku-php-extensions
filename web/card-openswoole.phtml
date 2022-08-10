@@ -1,0 +1,93 @@
+
+<section class="max-w-2xl mx-auto">
+  <div>
+    <h3 class="text-lg leading-6 font-medium text-gray-900">
+      ext-openswoole
+    </h3>
+    <p class="mt-1 max-w-2xl text-sm text-gray-500">
+      Details about the <a href="https://github.com/openswoole/swoole-src" class="text-indigo-600 hover:underline">OpenSwoole</a> extension.
+    </p>
+  </div>
+  <div class="mt-5 border-t border-gray-200">
+    <dl class="sm:divide-y sm:divide-gray-200">
+      <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+        <dt class="text-sm font-medium text-gray-500">
+          Extension loaded
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <?php echo extension_loaded('openswoole') ? 'Yes' : 'No'; ?>
+        </dd>
+      </div>
+      <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+        <dt class="text-sm font-medium text-gray-500">
+          Extension version
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <?php echo phpversion('openswoole'); ?>
+        </dd>
+      </div>
+
+      <?php if (extension_loaded('openswoole')) : ?>
+        <?php $openswoole = shell_exec('php --ri openswoole'); ?>
+
+        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">
+            JSON support
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <?php preg_match("/^json => (.+)/m", $openswoole, $json); echo $json[1]; ?>
+          </dd>
+        </div>
+        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">
+            HTTP2 support
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <?php preg_match("/^http2 => (.+)/m", $openswoole, $http2); echo $http2[1]; ?>
+          </dd>
+        </div>
+        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">
+            OpenSSL support
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <?php preg_match("/^openssl => (.+)/m", $openswoole, $openssl); echo $openssl[1]; ?>
+          </dd>
+        </div>
+        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">
+            Native cURL support
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <?php preg_match("/^curl-native => (.+)/m", $openswoole, $curl); echo $curl[1]; ?>
+          </dd>
+        </div>
+        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">
+            mysqlnd support
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <?php preg_match("/^mysqlnd => (.+)/m", $openswoole, $mysqlnd); echo $mysqlnd[1]; ?>
+          </dd>
+        </div>
+        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">
+            sockets support
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <?php preg_match("/^sockets => (.+)/m", $openswoole, $sockets); echo $sockets[1]; ?>
+          </dd>
+        </div>
+        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">
+            postgres support
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <?php preg_match("/^postgres => (.+)/m", $openswoole, $postgres); echo $postgres[1]; ?>
+          </dd>
+        </div>
+      <?php endif; ?>
+
+    </dl>
+  </div>
+</section>
