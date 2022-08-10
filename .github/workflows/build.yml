@@ -31,27 +31,30 @@ jobs:
           - 20200930 # PHP 8.0
           - 20210902 # PHP 8.1
 
-    if: ${{ matrix.stack != 'heroku-22' || matrix.series >= 20210902 }}
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Composer Install
+        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         run: composer install --prefer-dist --no-progress --no-suggest --ignore-platform-reqs
 
       - name: Copy requirements
+        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         run: cp ${BUILDPACK}/requirements.txt .
 
       - name: Build Dockerfile
+        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         run: |
           cat ${BUILDPACK}/support/build/_docker/${{ matrix.stack }}.Dockerfile > docker/build/${{ matrix.stack }}.Dockerfile
           cat docker/${{ matrix.stack }}.Dockerfile >> docker/build/${{ matrix.stack }}.Dockerfile
 
       - name: Docker build
+        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         run: docker build --pull --tag ${{ matrix.stack }} --file docker/build/${{ matrix.stack }}.Dockerfile .
 
       - name: Build liblzf library
+        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
@@ -59,6 +62,7 @@ jobs:
             ${{ matrix.stack }} deploy.sh --overwrite libraries/liblzf-3.6
 
       - name: Build lz4 library
+        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
@@ -66,6 +70,7 @@ jobs:
             ${{ matrix.stack }} deploy.sh --overwrite libraries/lz4-1.9.3
 
       - name: Build zstd library
+        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
@@ -73,6 +78,7 @@ jobs:
             ${{ matrix.stack }} deploy.sh --overwrite libraries/zstd-1.4.9
 
       - name: Build igbinary extension
+        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
@@ -83,6 +89,7 @@ jobs:
             extensions/no-debug-non-zts-${{ matrix.series }}/igbinary-3.2.7
 
       - name: Build msgpack extension
+        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
@@ -93,6 +100,7 @@ jobs:
             extensions/no-debug-non-zts-${{ matrix.series }}/msgpack-2.1.2
 
       - name: Build redis extension
+        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
@@ -103,7 +111,7 @@ jobs:
             extensions/no-debug-non-zts-${{ matrix.series }}/redis-5.3.7
 
       - name: Build relay extension
-        if: matrix.series != 20180731
+        if: matrix.series != 20180731 && (matrix.stack != 'heroku-22' || matrix.series >= 20210902)
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
@@ -114,6 +122,7 @@ jobs:
             extensions/no-debug-non-zts-${{ matrix.series }}/relay-0.4.4
 
       - name: Build swoole extension
+        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
@@ -124,6 +133,7 @@ jobs:
             extensions/no-debug-non-zts-${{ matrix.series }}/swoole-5.0.0
 
       - name: Build openswoole extension
+        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
