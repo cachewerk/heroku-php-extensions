@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "dd40b82aaf9c44b2fa64f395d3ed2a363aa8d34b"
+                "reference": "3cd7de1583bf19b522a912bc7720c537ad4df1bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/dd40b82aaf9c44b2fa64f395d3ed2a363aa8d34b",
-                "reference": "dd40b82aaf9c44b2fa64f395d3ed2a363aa8d34b",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/3cd7de1583bf19b522a912bc7720c537ad4df1bd",
+                "reference": "3cd7de1583bf19b522a912bc7720c537ad4df1bd",
                 "shasum": ""
             },
             "default-branch": true,
@@ -49,9 +49,9 @@
             ],
             "support": {
                 "issues": "https://github.com/heroku/heroku-buildpack-php/issues",
-                "source": "https://github.com/heroku/heroku-buildpack-php/tree/main"
+                "source": "https://github.com/heroku/heroku-buildpack-php/tree/v223"
             },
-            "time": "2021-12-10T16:59:36+00:00"
+            "time": "2022-08-04T22:06:04+00:00"
         }
     ],
     "aliases": [],
