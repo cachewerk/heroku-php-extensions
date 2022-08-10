@@ -5,6 +5,7 @@ Pre-built PHP extensions for Heroku that are not included or fully supported by 
 - [Relay](https://relaycache.com)
 - [PhpRedis](https://pecl.php.net/package/redis) (with _igbinary_, _lzf_, _lz4_ and _zstd_ support)
 - [Swoole](https://pecl.php.net/package/swoole)
+- [OpenSwoole](https://pecl.php.net/package/openswoole)
 - [MessagePack](https://pecl.php.net/package/msgpack)
 - [igbinary](https://pecl.php.net/package/igbinary)
 
@@ -36,6 +37,7 @@ Next, add any of the extensions to `composer.json` as you usually would:
 composer require "ext-relay:*"
 composer require "ext-redis:*"
 composer require "ext-swoole:*"
+composer require "ext-openswoole:*"
 composer require "ext-msgpack:*"
 composer require "ext-igbinary:*"
 ```
@@ -101,4 +103,7 @@ docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-
 
 # Build swoole
 docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/swoole-4.11.1
+
+# Build openswoole
+docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/openswoole-4.11.1
 ```
