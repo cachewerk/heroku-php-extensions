@@ -10,8 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added [OpenSwoole](https://github.com/openswoole/swoole-src) v4.11.1
 - Updated [Relay](https://github.com/cachewerk) to v0.4.4
 - Updated PhpRedis to v5.3.7
-- Updated Swoole to v4.8.11 for PHP <= 7.4
-- Updated Swoole to v5.0.0 for PHP >= 8.0
+- Updated Swoole to v4.8.11 for heroku-18, heroku-20, or PHP <= 7.4
+- Updated Swoole to v5.0.0 for heroku-22 and PHP >= 8.0
 
 ## [1.2.5] - 2022-01-14
 - Updated Swoole to v4.8.6
