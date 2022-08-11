@@ -2,4 +2,6 @@
 # Build Path: /app/.heroku/php
 # Build Deps: php-8.0.*
 
+CONFIGURE_EXTRA="--enable-swoole-json --enable-swoole-curl --enable-http2 --enable-sockets --enable-mysqlnd --enable-openssl"
+
 source $(dirname $0)/../no-debug-non-zts-20131226/swoole

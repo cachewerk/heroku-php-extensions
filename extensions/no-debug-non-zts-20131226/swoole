@@ -2,6 +2,4 @@
 
 dep_name=$(basename $BASH_SOURCE)
 
-CONFIGURE_EXTRA="--enable-swoole-curl --enable-sockets --enable-mysqlnd --enable-openssl"
-
 source $(dirname $BASH_SOURCE)/../../vendor/heroku/heroku-buildpack-php/support/build/extensions/pecl
