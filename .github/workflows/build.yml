@@ -113,7 +113,7 @@ jobs:
       - name: Build relay extension
         # skip relay build on PHP 7.3 and older
         # skip PHP 8.0 and older on heroku-22
-        if: matrix.series <= 20180731 && (matrix.stack != 'heroku-22' || matrix.series >= 20210902)
+        if: matrix.series >= 20190902 && (matrix.stack != 'heroku-22' || matrix.series >= 20210902)
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
