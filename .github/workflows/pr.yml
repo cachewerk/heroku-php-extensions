@@ -4,7 +4,7 @@ name: Test PR builds
 on: pull_request
 
 env:
-  S3_BUCKET: heroku-php-extensions
+  S3_BUCKET: heroku-php-extensions-k
   S3_PREFIX: pull-requests/${{ github.event.number }}/
   BUILDPACK: ./vendor/heroku/heroku-buildpack-php
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

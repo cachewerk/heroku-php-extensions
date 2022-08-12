@@ -21,7 +21,7 @@ jobs:
           - heroku-22
 
     env:
-      S3_BUCKET: heroku-php-extensions
+      S3_BUCKET: heroku-php-extensions-k
       BUILDPACK: ./vendor/heroku/heroku-buildpack-php
 
     steps:
