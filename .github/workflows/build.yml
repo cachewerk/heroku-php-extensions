@@ -130,7 +130,7 @@ jobs:
             --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
             --env-file=${BUILDPACK}/support/build/_docker/env.default \
             ${{ matrix.stack }} deploy.sh --overwrite \
-            extensions/no-debug-non-zts-${{ matrix.series }}/swoole-4.8.11
+            extensions/no-debug-non-zts-${{ matrix.series }}/swoole-4.8.12
 
       - name: Build openswoole extension
         if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
