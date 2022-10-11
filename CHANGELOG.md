@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Added support for `heroku-22` stack
 - Added [OpenSwoole](https://github.com/openswoole/swoole-src) v4.11.1
-- Updated [Relay](https://github.com/cachewerk) to v0.4.4
+- Updated [Relay](https://github.com/cachewerk) to v0.4.6
 - Updated PhpRedis to v5.3.7
 - Updated Swoole to v4.8.11
 
