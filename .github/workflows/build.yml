@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Composer Install
         if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
