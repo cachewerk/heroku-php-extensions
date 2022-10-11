@@ -108,5 +108,5 @@ docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-
 docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/swoole-4.8.12
 
 # Build openswoole
-docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/openswoole-4.11.1
+docker run --rm -ti --env-file=.env heroku-20 bob build extensions/no-debug-non-zts-20200930/openswoole-4.12.0
 ```
