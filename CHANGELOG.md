@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.2.6] - 2022-10-11
 - Added support for `heroku-22` stack
 - Added [OpenSwoole](https://github.com/openswoole/swoole-src) v4.12.0
 - Updated [Relay](https://github.com/cachewerk) to v0.4.6
@@ -59,7 +59,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/cachewerk/heroku-php-extensions/compare/v1.2.5...HEAD
+[Unreleased]: https://github.com/cachewerk/heroku-php-extensions/compare/v1.2.6...HEAD
+[1.2.6]: https://github.com/cachewerk/heroku-php-extensions/compare/v1.2.5...v1.2.6
 [1.2.5]: https://github.com/cachewerk/heroku-php-extensions/compare/v1.2.4...v1.2.5
 [1.2.4]: https://github.com/cachewerk/heroku-php-extensions/compare/v1.2.3...v1.2.4
 [1.2.3]: https://github.com/cachewerk/heroku-php-extensions/compare/v1.2.2...v1.2.3
