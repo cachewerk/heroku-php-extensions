@@ -9,7 +9,7 @@ Pre-built PHP extensions for Heroku that are not included or fully supported by 
 - [MessagePack](https://pecl.php.net/package/msgpack)
 - [igbinary](https://pecl.php.net/package/igbinary)
 
-The supported PHP versions are `7.3`, `7.4`, `8.0` and `8.1` on the `heroku-18`, `heroku-20`, and `heroku-22` stacks.
+The supported PHP versions are `7.3`, `7.4`, `8.0`, `8.1` and `8.2` on the `heroku-18`, `heroku-20`, and `heroku-22` stacks.
 
 Checkout the [demo app](https://php-extensions.herokuapp.com), or [browse the S3 bucket](https://s3.us-east-1.amazonaws.com/heroku-php-extensions/index.html).
 
