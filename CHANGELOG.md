@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - Added PHP 8.2 support
+- Dropped `heroku-18` support
 
 ## [1.2.6] - 2022-10-11
 - Added support for `heroku-22` stack
