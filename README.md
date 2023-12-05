@@ -90,13 +90,13 @@ docker run --rm -ti --env-file=.env heroku-22 bob build --overwrite libraries/lz
 docker run --rm -ti --env-file=.env heroku-22 bob build --overwrite libraries/zstd-1.4.9
 
 # Build igbinary
-docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20200930/igbinary-3.2.7
+docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20200930/igbinary-3.2.15
 
 # Build msgpack
-docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20200930/msgpack-2.1.2
+docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20200930/msgpack-2.2.0
 
 # Build phpredis
-docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20200930/redis-5.3.7
+docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20200930/redis-6.0.2
 
 # Build relay
 docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20200930/relay-0.4.6

@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Added PHP 8.2 support
 - Dropped `heroku-18` support
+- Updated PhpRedis to v6.0.2
+- Updated igbinary to v3.2.15
+- Updated msgpack to v2.2.0
 
 ## [1.2.6] - 2022-10-11
 - Added support for `heroku-22` stack
