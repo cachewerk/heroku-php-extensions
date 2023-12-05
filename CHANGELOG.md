@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated PhpRedis to v6.0.2
 - Updated igbinary to v3.2.15
 - Updated msgpack to v2.2.0
+- Updated [Relay](https://github.com/cachewerk) to v0.6.8
 
 ## [1.2.6] - 2022-10-11
 - Added support for `heroku-22` stack
