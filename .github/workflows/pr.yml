@@ -20,7 +20,6 @@ jobs:
     strategy:
       matrix:
         stack:
-          - heroku-18
           - heroku-20
           - heroku-22
         series:
@@ -28,6 +27,7 @@ jobs:
           - 20190902 # PHP 7.4
           - 20200930 # PHP 8.0
           - 20210902 # PHP 8.1
+          - 20220829 # PHP 8.2
 
     steps:
       - name: Checkout
@@ -143,7 +143,7 @@ jobs:
 
     strategy:
       matrix:
-        stack: ['heroku-18', 'heroku-20', 'heroku-22']
+        stack: ['heroku-20', 'heroku-22']
 
     steps:
       - name: Checkout
