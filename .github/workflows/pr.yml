@@ -28,6 +28,7 @@ jobs:
           - 20200930 # PHP 8.0
           - 20210902 # PHP 8.1
           - 20220829 # PHP 8.2
+          - 20230831 # PHP 8.3
 
     steps:
       - name: Checkout
