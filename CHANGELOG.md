@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added PHP 8.2 and 8.3 support
 - Dropped `heroku-18` support
 - Dropped PHP 7.3, 7.4 and 8.0 support
-- Upgraded Swoole v5.1.1 for PHP 8.3
+- Upgraded Swoole to v5.1.1 for PHP 8.3
 - Upgraded OpenSwoole to v22.1.0 for PHP 8.3
 - Updated Swoole to v4.8.13
 - Updated OpenSwoole to v4.12.1
