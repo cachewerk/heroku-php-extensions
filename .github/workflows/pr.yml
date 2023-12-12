@@ -23,36 +23,29 @@ jobs:
           - heroku-20
           - heroku-22
         series:
-          - 20180731 # PHP 7.3
-          - 20190902 # PHP 7.4
-          - 20200930 # PHP 8.0
           - 20210902 # PHP 8.1
           - 20220829 # PHP 8.2
+          - 20230831 # PHP 8.3
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Composer Install
-        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         run: composer install --prefer-dist --no-progress --no-suggest --ignore-platform-reqs
 
       - name: Copy requirements
-        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         run: cp ${BUILDPACK}/requirements.txt .
 
       - name: Build Dockerfile
-        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         run: |
           cat ${BUILDPACK}/support/build/_docker/${{ matrix.stack }}.Dockerfile > docker/build/${{ matrix.stack }}.Dockerfile
           cat docker/${{ matrix.stack }}.Dockerfile >> docker/build/${{ matrix.stack }}.Dockerfile
 
       - name: Docker build
-        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         run: docker build --pull --tag ${{ matrix.stack }} --file docker/build/${{ matrix.stack }}.Dockerfile .
 
       - name: Build liblzf library
-        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
@@ -60,7 +53,6 @@ jobs:
             ${{ matrix.stack }} deploy.sh --overwrite libraries/liblzf-3.6
 
       - name: Build lz4 library
-        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
@@ -68,7 +60,6 @@ jobs:
             ${{ matrix.stack }} deploy.sh --overwrite libraries/lz4-1.9.3
 
       - name: Build zstd library
-        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
@@ -76,7 +67,6 @@ jobs:
             ${{ matrix.stack }} deploy.sh --overwrite libraries/zstd-1.4.9
 
       - name: Build igbinary extension
-        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
@@ -86,7 +76,6 @@ jobs:
             ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/igbinary-3.2.15
 
       - name: Build msgpack extension
-        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
@@ -96,7 +85,6 @@ jobs:
             ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/msgpack-2.2.0
 
       - name: Build redis extension
-        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
@@ -106,7 +94,6 @@ jobs:
             ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/redis-6.0.2
 
       - name: Build relay extension
-        if: matrix.series != 20180731 && (matrix.stack != 'heroku-22' || matrix.series >= 20210902)
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
@@ -115,8 +102,8 @@ jobs:
             --env-file=${BUILDPACK}/support/build/_docker/env.default \
             ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/relay-0.6.8
 
-      - name: Build swoole extension
-        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
+      - name: Build swoole 4.x extension
+        if: matrix.series <= 20220829
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
@@ -125,8 +112,18 @@ jobs:
             --env-file=${BUILDPACK}/support/build/_docker/env.default \
             ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/swoole-4.8.13
 
-      - name: Build openswoole extension
-        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
+      - name: Build swoole 5.x extension
+        if: matrix.series >= 20230831
+        shell: 'script -q -e -c "bash {0}"'
+        run: |
+          docker run --rm -ti \
+            --env UPSTREAM_S3_BUCKET=lang-php \
+            --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
+            --env-file=${BUILDPACK}/support/build/_docker/env.default \
+            ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/swoole-5.1.1
+
+      - name: Build openswoole 4.x extension
+        if: matrix.series <= 20220829
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
@@ -134,6 +131,16 @@ jobs:
             --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
             --env-file=${BUILDPACK}/support/build/_docker/env.default \
             ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/openswoole-4.12.1
+
+      - name: Build openswoole 22.x extension
+        if: matrix.series >= 20230831
+        shell: 'script -q -e -c "bash {0}"'
+        run: |
+          docker run --rm -ti \
+            --env UPSTREAM_S3_BUCKET=lang-php \
+            --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
+            --env-file=${BUILDPACK}/support/build/_docker/env.default \
+            ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/openswoole-22.1.0
 
   mkrepo:
     name: Make repository
@@ -143,7 +150,9 @@ jobs:
 
     strategy:
       matrix:
-        stack: ['heroku-20', 'heroku-22']
+        stack:
+          - heroku-20
+          - heroku-22
 
     steps:
       - name: Checkout
