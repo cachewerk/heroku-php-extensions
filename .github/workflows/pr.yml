@@ -116,8 +116,8 @@ jobs:
             --env-file=${BUILDPACK}/support/build/_docker/env.default \
             ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/relay-0.6.8
 
-      - name: Build swoole extension
-        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
+      - name: Build swoole 4.x extension
+        if: matrix.stack != 'heroku-22' || matrix.series >= 20230831
         shell: 'script -q -e -c "bash {0}"'
         run: |
           docker run --rm -ti \
@@ -126,7 +126,17 @@ jobs:
             --env-file=${BUILDPACK}/support/build/_docker/env.default \
             ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/swoole-4.8.13
 
-      - name: Build openswoole extension
+      - name: Build swoole 5.x extension
+        if: matrix.series >= 20210902
+        shell: 'script -q -e -c "bash {0}"'
+        run: |
+          docker run --rm -ti \
+            --env UPSTREAM_S3_BUCKET=lang-php \
+            --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
+            --env-file=${BUILDPACK}/support/build/_docker/env.default \
+            ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/swoole-5.1.1
+
+      - name: Build openswoole 4.x extension
         if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
         shell: 'script -q -e -c "bash {0}"'
         run: |
@@ -135,6 +145,16 @@ jobs:
             --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
             --env-file=${BUILDPACK}/support/build/_docker/env.default \
             ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/openswoole-4.12.1
+
+      - name: Build openswoole 22.x extension
+        if: matrix.stack != 'heroku-22' || matrix.series >= 20210902
+        shell: 'script -q -e -c "bash {0}"'
+        run: |
+          docker run --rm -ti \
+            --env UPSTREAM_S3_BUCKET=lang-php \
+            --env UPSTREAM_S3_PREFIX=dist-${{ matrix.stack }}-stable/ \
+            --env-file=${BUILDPACK}/support/build/_docker/env.default \
+            ${{ matrix.stack }} deploy.sh --overwrite extensions/no-debug-non-zts-${{ matrix.series }}/openswoole-22.1.0
 
   mkrepo:
     name: Make repository
