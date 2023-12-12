@@ -5,15 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-- Added PHP 8.2 support
-- Dropped `heroku-18` support
+## [1.3.0] - 2023-12-12
+- Added PHP 8.2 and 8.3 support
 - Updated PhpRedis to v6.0.2
 - Updated igbinary to v3.2.15
 - Updated msgpack to v2.2.0
 - Updated [Relay](https://github.com/cachewerk) to v0.6.8
 - Updated Swoole to v4.8.13
 - Updated OpenSwoole to v4.12.1
+- Removed `heroku-18` support
 
 ## [1.2.6] - 2022-10-11
 - Added support for `heroku-22` stack
