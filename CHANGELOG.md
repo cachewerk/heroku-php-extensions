@@ -72,7 +72,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/cachewerk/heroku-php-extensions/compare/v1.2.6...HEAD
+[Unreleased]: https://github.com/cachewerk/heroku-php-extensions/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/cachewerk/heroku-php-extensions/compare/v1.2.6...v2.0.0
 [1.2.6]: https://github.com/cachewerk/heroku-php-extensions/compare/v1.2.5...v1.2.6
 [1.2.5]: https://github.com/cachewerk/heroku-php-extensions/compare/v1.2.4...v1.2.5
 [1.2.4]: https://github.com/cachewerk/heroku-php-extensions/compare/v1.2.3...v1.2.4
