@@ -150,7 +150,9 @@ jobs:
 
     strategy:
       matrix:
-        stack: ['heroku-20', 'heroku-22']
+        stack:
+          - heroku-20
+          - heroku-22
 
     steps:
       - name: Checkout
