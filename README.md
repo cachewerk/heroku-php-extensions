@@ -90,20 +90,20 @@ docker run --rm -ti --env-file=.env heroku-22 bob build --overwrite libraries/lz
 docker run --rm -ti --env-file=.env heroku-22 bob build --overwrite libraries/zstd-1.4.9
 
 # Build igbinary
-docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20200930/igbinary-3.2.15
+docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20230831/igbinary-3.2.15
 
 # Build msgpack
-docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20200930/msgpack-2.2.0
+docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20230831/msgpack-2.2.0
 
 # Build phpredis
-docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20200930/redis-6.0.2
+docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20230831/redis-6.0.2
 
 # Build relay
-docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20200930/relay-0.6.8
+docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20230831/relay-0.6.8
 
 # Build swoole
-docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20200930/swoole-4.8.13
+docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20230831/swoole-4.8.13
 
 # Build openswoole
-docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20200930/openswoole-4.12.1
+docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20230831/openswoole-4.12.1
 ```
