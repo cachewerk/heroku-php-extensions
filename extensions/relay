@@ -3,7 +3,7 @@
 set -o pipefail
 set -eu
 
-source $(dirname $BASH_SOURCE)/../../vendor/heroku/heroku-buildpack-php/support/build/_util/include/manifest.sh
+source $(dirname $BASH_SOURCE)/../vendor/heroku/heroku-buildpack-php/support/build/_util/include/manifest.sh
 
 OUT_PREFIX=$1
 
@@ -48,6 +48,6 @@ MANIFEST_REPLACE="${MANIFEST_REPLACE:-"{}"}"
 MANIFEST_PROVIDE="${MANIFEST_PROVIDE:-"{}"}"
 MANIFEST_EXTRA="${MANIFEST_EXTRA:-"{\"config\":\"etc/php/conf.d/relay.ini-dist\"}"}"
 
-python $(dirname $BASH_SOURCE)/../../vendor/heroku/heroku-buildpack-php/support/build/_util/include/manifest.py "heroku-sys-php-extension" "heroku-sys/ext-${dep_name}" "$dep_version" "${dep_formula}.tar.gz" "$MANIFEST_REQUIRE" "$MANIFEST_CONFLICT" "$MANIFEST_REPLACE" "$MANIFEST_PROVIDE" "$MANIFEST_EXTRA" > $dep_manifest
+python $(dirname $BASH_SOURCE)/../vendor/heroku/heroku-buildpack-php/support/build/_util/include/manifest.py "heroku-sys-php-extension" "heroku-sys/ext-${dep_name}" "$dep_version" "${dep_formula}.tar.gz" "$MANIFEST_REQUIRE" "$MANIFEST_CONFLICT" "$MANIFEST_REPLACE" "$MANIFEST_PROVIDE" "$MANIFEST_EXTRA" > $dep_manifest
 
 print_or_export_manifest_cmd "$(generate_manifest_cmd "$dep_manifest")"

@@ -2,3 +2,17 @@
 /vendor
 .env
 requirements.txt
+
+libraries/*
+!libraries/liblzf
+!libraries/lz4
+!libraries/zstd
+
+extensions/*
+!extensions/igbinary
+!extensions/msgpack
+!extensions/openswoole
+!extensions/redis
+!extensions/relay
+!extensions/swoole
+
