@@ -27,16 +27,13 @@ jobs:
       matrix:
         stack:
           - name: "heroku-22"
-            stable: "dist-heroku-22-stable/"
-            develop: "dist-heroku-22-develop/"
+            prefix: "dist-heroku-22-stable/"
             os: "ubuntu-latest"
           - name: "heroku-24"
-            stable: "dist-heroku-24-amd64-stable/"
-            develop: "dist-heroku-24-amd64-develop/"
+            prefix: "dist-heroku-24-amd64-stable/"
             os: "ubuntu-latest"
           - name: "heroku-24"
-            stable: "dist-heroku-24-arm64-stable/"
-            develop: "dist-heroku-24-arm64-develop/"
+            prefix: "dist-heroku-24-arm64-stable/"
             os: "ubuntu-24.04-arm"
         series:
           - version: 20210902
@@ -104,8 +101,7 @@ jobs:
           # heroku-24 cannot compile openswoole 4.12.1 anymore, include for heroku-22 only
           - stack:
               name: "heroku-22"
-              stable: "dist-heroku-22-stable/"
-              develop: "dist-heroku-22-develop/"
+              prefix: "dist-heroku-22-stable/"
               os: "ubuntu-latest"
             series:
               version: 20220829
@@ -138,35 +134,35 @@ jobs:
         run: ./scripts/build-lib.sh ${{ matrix.stack.name }} zstd "${{ matrix.series.zstd }}" true
 
       - name: Build igbinary extension
-        run: ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} igbinary "${{ matrix.series.igbinary }}" "php-${{ matrix.series.php }}.*" ${{ matrix.stack.stable }} true
+        run: ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} igbinary "${{ matrix.series.igbinary }}" "php-${{ matrix.series.php }}.*" ${{ matrix.stack.prefix }} true
 
       - name: Build msgpack extension
-        run: ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} msgpack "${{ matrix.series.msgpack }}" "php-${{ matrix.series.php }}.*" ${{ matrix.stack.stable }} true
+        run: ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} msgpack "${{ matrix.series.msgpack }}" "php-${{ matrix.series.php }}.*" ${{ matrix.stack.prefix }} true
 
       - name: Build redis extensions
         run: |
           set -e
           for VERSION in ${{ matrix.series.redis }}; do
-            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} redis "$VERSION" "php-${{ matrix.series.php }}.*,libraries/liblzf-*,libraries/lz4-*,libraries/zstd-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/igbinary-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/msgpack-*" ${{ matrix.stack.stable }} true
+            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} redis "$VERSION" "php-${{ matrix.series.php }}.*,libraries/liblzf-*,libraries/lz4-*,libraries/zstd-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/igbinary-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/msgpack-*" ${{ matrix.stack.prefix }} true
           done
 
       - name: Build relay extension
         run: |
           set -e
           for VERSION in ${{ matrix.series.relay }}; do
-            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} relay "$VERSION" "php-${{ matrix.series.php }}.*,libraries/liblzf-*,libraries/lz4-*,libraries/zstd-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/igbinary-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/msgpack-*" ${{ matrix.stack.stable }} true
+            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} relay "$VERSION" "php-${{ matrix.series.php }}.*,libraries/liblzf-*,libraries/lz4-*,libraries/zstd-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/igbinary-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/msgpack-*" ${{ matrix.stack.prefix }} true
           done
 
       - name: Build swoole extension
         run: |
           set -e
           for VERSION in ${{ matrix.series.swoole }}; do
-            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} swoole "$VERSION" "php-${{ matrix.series.php }}.*" ${{ matrix.stack.stable }} true
+            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} swoole "$VERSION" "php-${{ matrix.series.php }}.*" ${{ matrix.stack.prefix }} true
           done
 
       - name: Build openswoole extension
         run: |
           set -e
           for VERSION in ${{ matrix.series.openswoole }}; do
-            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} openswoole "$VERSION" "php-${{ matrix.series.php }}.*" ${{ matrix.stack.stable }} true
+            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} openswoole "$VERSION" "php-${{ matrix.series.php }}.*" ${{ matrix.stack.prefix }} true
           done
