@@ -35,7 +35,7 @@
             JSON support
           </dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <?php preg_match("/^json => (.+)/m", $openswoole, $json); echo $json[1]; ?>
+            <?php preg_match("/^json => (.+)/m", $openswoole, $json); echo $json[1] ?? 'disabled'; ?>
           </dd>
         </div>
         <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
@@ -43,7 +43,7 @@
             HTTP2 support
           </dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <?php preg_match("/^http2 => (.+)/m", $openswoole, $http2); echo $http2[1]; ?>
+            <?php preg_match("/^http2 => (.+)/m", $openswoole, $http2); echo $http2[1] ?? 'disabled'; ?>
           </dd>
         </div>
         <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
@@ -51,7 +51,7 @@
             OpenSSL support
           </dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <?php preg_match("/^openssl => (.+)/m", $openswoole, $openssl); echo $openssl[1]; ?>
+            <?php preg_match("/^openssl => (.+)/m", $openswoole, $openssl); echo $openssl[1] ?? 'disabled'; ?>
           </dd>
         </div>
         <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
@@ -59,7 +59,7 @@
             Native cURL support
           </dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <?php preg_match("/^curl-native => (.+)/m", $openswoole, $curl); echo $curl[1]; ?>
+            <?php preg_match("/^curl-native => (.+)/m", $openswoole, $curl); echo $curl[1] ?? 'disabled'; ?>
           </dd>
         </div>
         <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
@@ -67,7 +67,7 @@
             mysqlnd support
           </dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <?php preg_match("/^mysqlnd => (.+)/m", $openswoole, $mysqlnd); echo $mysqlnd[1]; ?>
+            <?php preg_match("/^mysqlnd => (.+)/m", $openswoole, $mysqlnd); echo $mysqlnd[1] ?? 'disabled'; ?>
           </dd>
         </div>
         <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
@@ -75,7 +75,7 @@
             sockets support
           </dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <?php preg_match("/^sockets => (.+)/m", $openswoole, $sockets); echo $sockets[1]; ?>
+            <?php preg_match("/^sockets => (.+)/m", $openswoole, $sockets); echo $sockets[1] ?? 'disabled'; ?>
           </dd>
         </div>
         <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
@@ -83,7 +83,7 @@
             postgres support
           </dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <?php preg_match("/^postgres => (.+)/m", $openswoole, $postgres); echo $postgres[1]; ?>
+            <?php preg_match("/^postgres => (.+)/m", $openswoole, $postgres); echo $postgres[1] ?? 'disabled'; ?>
           </dd>
         </div>
       <?php endif; ?>

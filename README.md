@@ -9,7 +9,7 @@ Pre-built PHP extensions for Heroku that are not included or fully supported by 
 - [MessagePack](https://pecl.php.net/package/msgpack)
 - [igbinary](https://pecl.php.net/package/igbinary)
 
-The supported PHP versions are `8.1` to `8.3` on the `heroku-20` and `heroku-22` stacks.
+The supported PHP versions are `8.1` to `8.5` on the `heroku-22` and `heroku-24` stacks.
 
 Checkout the [demo app](https://php-extensions.herokuapp.com), or [browse the S3 bucket](https://s3.us-east-1.amazonaws.com/heroku-php-extensions/index.html).
 
@@ -24,11 +24,14 @@ heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://relay.so/heroku/"
 If you prefer using the AWS S3 repositories, add the corresponding repository to your Heroku app:
 
 ```bash
-# heroku-20
-heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://heroku-php-extensions.s3.amazonaws.com/dist-heroku-20-stable/"
-
 # heroku-22
 heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://heroku-php-extensions.s3.amazonaws.com/dist-heroku-22-stable/"
+
+# heroku-24 (amd64)
+heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://heroku-php-extensions.s3.amazonaws.com/dist-heroku-24-amd64-stable/"
+
+# heroku-24 (arm64)
+heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://heroku-php-extensions.s3.amazonaws.com/dist-heroku-24-arm64-stable/"
 ```
 
 Next, add any of the extensions to `composer.json` as you usually would:
@@ -57,6 +60,8 @@ Before continuing, read and understand the [official build instructions](https:/
 ### Set up
 
 ```bash
+# ./scripts/setup-local.sh
+
 # Install Composer dependencies
 composer install
 
@@ -71,39 +76,41 @@ Be sure to set all variables in your newly created `.env` file.
 
 ### Dockerfile
 
-Create a custom Dockerfile for `heroku-22`.
+Create a custom Dockerfile for `heroku-24`.
 
 ```
-cat vendor/heroku/heroku-buildpack-php/support/build/_docker/heroku-22.Dockerfile > docker/build/heroku-22.Dockerfile
-cat docker/heroku-22.Dockerfile >> docker/build/heroku-22.Dockerfile
+./scripts/create-dockerfile.sh heroku-24
 ```
 
 ### Build
 
 ```bash
 # Docker build
-docker build --pull --tag heroku-22 --file docker/build/heroku-22.Dockerfile .
+./scripts/build-dockerfile.sh heroku-24
 
 # Build libraries
-docker run --rm -ti --env-file=.env heroku-22 bob build --overwrite libraries/liblzf-3.6
-docker run --rm -ti --env-file=.env heroku-22 bob build --overwrite libraries/lz4-1.9.3
-docker run --rm -ti --env-file=.env heroku-22 bob build --overwrite libraries/zstd-1.4.9
+./scripts/build-lib.sh heroku-24 liblzf 3.6
+./scripts/build-lib.sh heroku-24 lz4 1.9.3
+./scripts/build-lib.sh heroku-24 zstd 1.4.9
 
 # Build igbinary
-docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20230831/igbinary-3.2.15
+./scripts/build-extension.sh heroku-24 8.4 20240924 igbinary 3.2.16 "php-8.4.*" "dist-heroku-24-amd64-stable/"
 
 # Build msgpack
-docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20230831/msgpack-2.2.0
+./scripts/build-extension.sh heroku-24 8.4 20240924 msgpack 2.2.0 "php-8.4.*" "dist-heroku-24-amd64-stable/"
 
-# Build phpredis
-docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20230831/redis-6.0.2
+# Build phpredis (has extra dependencies, libraries need to be "deployed" already)
+./scripts/build-extension.sh heroku-24 8.4 20240924 redis 6.3.0 "php-8.4.*,libraries/liblzf-*,libraries/lz4-*,libraries/zstd-*,extensions/no-debug-non-zts-20240924/igbinary-*,extensions/no-debug-non-zts-20240924/msgpack-*" "dist-heroku-24-amd64-stable/"
 
-# Build relay
-docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20230831/relay-0.6.8
+# Build relay (has extra dependencies, libraries need to be "deployed" already)
+./scripts/build-extension.sh heroku-24 8.4 20240924 relay 0.20.0 "php-8.4.*,libraries/liblzf-*,libraries/lz4-*,libraries/zstd-*,extensions/no-debug-non-zts-20240924/igbinary-*,extensions/no-debug-non-zts-20240924/msgpack-*" "dist-heroku-24-amd64-stable/"
 
 # Build swoole
-docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20230831/swoole-4.8.13
+./scripts/build-extension.sh heroku-24 8.4 20240924 swoole 6.1.7 "php-8.4.*" "dist-heroku-24-amd64-stable/"
 
 # Build openswoole
-docker run --rm -ti --env-file=.env heroku-22 bob build extensions/no-debug-non-zts-20230831/openswoole-4.12.1
+./scripts/build-extension.sh heroku-24 8.4 20240924 openswoole 25.2.0 "php-8.4.*" "dist-heroku-24-amd64-stable/"
 ```
+### Versions
+
+Versions can be added and upgraded in [build.yml](./.github/workflows/build.yml) and will automatically be built and deployed by GitHub actions.
