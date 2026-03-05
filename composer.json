@@ -4,7 +4,7 @@
     "type": "library",
     "license": "MIT",
     "require": {
-        "php": "^8.5",
+        "php": "^8.3",
         "ext-igbinary": "*",
         "ext-msgpack": "*",
         "ext-redis": "*",
