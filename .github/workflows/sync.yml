@@ -31,7 +31,6 @@ jobs:
 
     env:
       S3_BUCKET: ${{ secrets.S3_BUCKET || 'heroku-php-extensions' }}
-      S3_REGION: ${{ secrets.S3_REGION || '' }}
       BUILDPACK: ./vendor/heroku/heroku-buildpack-php
 
     steps:
@@ -46,7 +45,7 @@ jobs:
 
       - name: Build Dockerfile
         run: ./scripts/create-dockerfile.sh ${{ matrix.stack.name }}
-        
+
       - name: Docker build
         run: ./scripts/build-dockerfile.sh ${{ matrix.stack.name }}
 

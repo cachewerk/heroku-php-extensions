@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 
 HEROKUSTACK="$1" # e.g. "heroku-22"
@@ -8,7 +10,7 @@ PHP_APIVERSION="$3" # e.g. "20240924"
 EXTENSION_NAME="$4" # e.g. "igbinary"
 EXTENSION_VERSION="$5" # e.g. "3.2.15"
 EXTENSION_DEPS="$6" # e.g. "php-$PHP_VERSION.*"
-UPSTREAM_S3_PREFIX="$7" # e.g. "dist-heroku-24-amd64-stable/"
+UPSTREAM_S3_PREFIX="$7" # upstream (lang-php) S3 prefix, e.g. "dist-heroku-24-amd64-stable/"
 WITH_DEPLOY=${8:-"false"} # e.g. "true" or "false"
 
 if [ "$EXTENSION_VERSION" == "" ]; then

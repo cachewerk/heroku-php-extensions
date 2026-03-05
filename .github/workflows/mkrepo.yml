@@ -18,11 +18,11 @@ on:
 jobs:
 
   mkrepo:
-    name: Make repository
+    name: Make repository (${{ matrix.stack.name }}, ${{ inputs.S3_PREFIX || matrix.stack.develop }})
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
 
     strategy:
       matrix:
@@ -42,7 +42,6 @@ jobs:
 
     env:
       S3_BUCKET: ${{ secrets.S3_BUCKET || 'heroku-php-extensions' }}
-      S3_REGION: ${{ secrets.S3_REGION || '' }}
       S3_PREFIX: ${{ inputs.S3_PREFIX || matrix.stack.develop }}
       BUILDPACK: ./vendor/heroku/heroku-buildpack-php
 
@@ -58,7 +57,7 @@ jobs:
 
       - name: Build Dockerfile
         run: ./scripts/create-dockerfile.sh ${{ matrix.stack.name }}
-        
+
       - name: Docker build
         run: ./scripts/build-dockerfile.sh ${{ matrix.stack.name }}
 
