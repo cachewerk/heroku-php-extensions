@@ -18,7 +18,7 @@ on:
 jobs:
 
   mkrepo:
-    name: Make repository
+    name: Make repository (${{ matrix.stack.name }}, ${{ inputs.S3_PREFIX || matrix.stack.develop }})
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -58,7 +58,7 @@ jobs:
 
       - name: Build Dockerfile
         run: ./scripts/create-dockerfile.sh ${{ matrix.stack.name }}
-        
+
       - name: Docker build
         run: ./scripts/build-dockerfile.sh ${{ matrix.stack.name }}
 
