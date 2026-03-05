@@ -45,7 +45,7 @@ jobs:
 
       - name: Build Dockerfile
         run: ./scripts/create-dockerfile.sh ${{ matrix.stack.name }}
-        
+
       - name: Docker build
         run: ./scripts/build-dockerfile.sh ${{ matrix.stack.name }}
 

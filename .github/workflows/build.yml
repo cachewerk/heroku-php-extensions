@@ -12,7 +12,7 @@ on:
 
 jobs:
   build:
-    name: Build PHP ${{ matrix.series.php }} for ${{ matrix.stack.name }}
+    name: Build PHP ${{ matrix.series.php }} (${{ matrix.stack.name }}, ${{ matrix.stack.arch }})
     runs-on: ${{ matrix.stack.os }}
     timeout-minutes: 20
     env:
@@ -27,14 +27,17 @@ jobs:
       matrix:
         stack:
           - name: "heroku-22"
+            arch: "amd64"
             prefix: "dist-heroku-22-develop/"
             upstream: "dist-heroku-22-stable/"
             os: "ubuntu-latest"
           - name: "heroku-24"
+            arch: "amd64"
             prefix: "dist-heroku-24-amd64-develop/"
             upstream: "dist-heroku-24-amd64-stable/"
             os: "ubuntu-latest"
           - name: "heroku-24"
+            arch: "arm64"
             prefix: "dist-heroku-24-arm64-develop/"
             upstream: "dist-heroku-24-arm64-stable/"
             os: "ubuntu-24.04-arm"
@@ -54,6 +57,7 @@ jobs:
           # heroku-24 cannot compile openswoole 4.12.1 anymore, include for heroku-22 only
           - stack:
               name: "heroku-22"
+              arch: "amd64"
               prefix: "dist-heroku-22-develop/"
               upstream: "dist-heroku-22-stable/"
               os: "ubuntu-latest"
