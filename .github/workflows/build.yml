@@ -12,7 +12,7 @@ on:
 
 jobs:
   build:
-    name: Build and deploy ${{ matrix.stack.name }} extensions with PHP ${{ matrix.series.php }} on ${{ matrix.stack.os }}
+    name: Build PHP ${{ matrix.series.php }} for ${{ matrix.stack.name }}
     runs-on: ${{ matrix.stack.os }}
     timeout-minutes: 20
     env:
@@ -37,11 +37,11 @@ jobs:
             prefix: "dist-heroku-24-arm64-develop/"
             os: "ubuntu-24.04-arm"
         series:
-          - {version: 20210902, php: "8.1", liblzf: "3.6", lz4: "1.9.3", zstd: "1.4.9", igbinary: "3.2.15", msgpack: "2.2.0", redis: ["5.3.7", "6.3.0"], relay: ["0.6.8"], swoole: ["4.8.13", "5.1.8", "6.1.7"], openswoole: ["4.12.1", "22.1.2"]}
-          - {version: 20220829, php: "8.2", liblzf: "3.6", lz4: "1.9.3", zstd: "1.4.9", igbinary: "3.2.15", msgpack: "2.2.0", redis: ["5.3.7", "6.3.0"], relay: ["0.6.8"], swoole: ["4.8.13", "5.1.8", "6.1.7"], openswoole: ["22.1.2", "25.2.0", "26.2.0"]}
-          - {version: 20230831, php: "8.3", liblzf: "3.6", lz4: "1.9.3", zstd: "1.4.9", igbinary: "3.2.15", msgpack: "2.2.0", redis: ["5.3.7", "6.3.0"], relay: ["0.6.8", "0.20.0"], swoole: ["5.1.8", "6.1.7"], openswoole: ["22.1.2", "25.2.0", "26.2.0"]}
-          - {version: 20240924, php: "8.4", liblzf: "3.6", lz4: "1.9.3", zstd: "1.4.9", igbinary: "3.2.15", msgpack: "2.2.0", redis: ["6.3.0"], relay: ["0.20.0"], swoole: ["6.1.7"], openswoole: ["25.2.0", "26.2.0"]}
-          - {version: 20250925, php: "8.5", liblzf: "3.6", lz4: "1.10.0", zstd: "1.5.7", igbinary: "3.2.17RC1", msgpack: "2.2.0", redis: ["6.3.0"], relay: ["0.20.0"], swoole: ["6.2.0RC1"], openswoole: ["26.2.0"]}
+          - { version: 20210902, php: "8.1", liblzf: "3.6", lz4: "1.9.3", zstd: "1.4.9", igbinary: "3.2.15", msgpack: "2.2.0", redis: ["5.3.7", "6.3.0"], relay: ["0.6.8"], swoole: ["4.8.13", "5.1.8", "6.1.7"], openswoole: ["4.12.1", "22.1.2"] }
+          - { version: 20220829, php: "8.2", liblzf: "3.6", lz4: "1.9.3", zstd: "1.4.9", igbinary: "3.2.15", msgpack: "2.2.0", redis: ["5.3.7", "6.3.0"], relay: ["0.6.8"], swoole: ["4.8.13", "5.1.8", "6.1.7"], openswoole: ["22.1.2", "25.2.0", "26.2.0"] }
+          - { version: 20230831, php: "8.3", liblzf: "3.6", lz4: "1.9.3", zstd: "1.4.9", igbinary: "3.2.15", msgpack: "2.2.0", redis: ["5.3.7", "6.3.0"], relay: ["0.6.8", "0.20.0"], swoole: ["5.1.8", "6.1.7"], openswoole: ["22.1.2", "25.2.0", "26.2.0"] }
+          - { version: 20240924, php: "8.4", liblzf: "3.6", lz4: "1.9.3", zstd: "1.4.9", igbinary: "3.2.15", msgpack: "2.2.0", redis: ["6.3.0"], relay: ["0.20.0"], swoole: ["6.1.7"], openswoole: ["25.2.0", "26.2.0"] }
+          - { version: 20250925, php: "8.5", liblzf: "3.6", lz4: "1.10.0", zstd: "1.5.7", igbinary: "3.2.17RC1", msgpack: "2.2.0", redis: ["6.3.0"], relay: ["0.20.0"], swoole: ["6.2.0RC1"], openswoole: ["26.2.0"] }
         exclude:
           # heroku-24 no longer supports php-8.1
           - stack:
