@@ -5,9 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.0.0] - 2026-03-04
-
-Replaced file based declaration approach with shell scripts (generate instead of declaration)
+## [3.0.0] - 2026-03-05
 
 ### Added
 - Added `heroku-24` stack support
@@ -15,32 +13,30 @@ Replaced file based declaration approach with shell scripts (generate instead of
 - Added Swoole v5.1.8, v6.1.7 and v6.2.0RC1
 - Added OpenSwoole v22.1.2, v25.2.0 and v26.2.0
 - Added PhpRedis v5.3.7 and v6.3.0
-- Added [Relay](https://github.com/cachewerk) v0.20.0
+- Added [Relay](https://github.com/cachewerk/relay) v0.20.0
 - Added igbinary v3.2.17RC1
-- Added build scripts for local development
 
 ### Changed
-- Replaced file-based extension declarations with shell scripts
-- Overhauled build workflow for dynamic library versions and fork-friendly S3 configuration
+- Refactored build workflow
 
 ### Removed
 - Dropped `heroku-20` stack support
 
 ### heroku-22 stack
 
-| PHP   | igbinary    | msgpack | redis           | relay            | swoole                    | openswoole                           |
-| ----- | ----------- | ------- | --------------- | ---------------- | ------------------------- | ------------------------------------ |
-| `8.1` | `3.2.15`    | `2.2.0` | `5.3.7` `6.3.0` | `0.6.8`          | `4.8.13` `5.1.8` `6.1.7` | `4.12.1` `22.1.2`                    |
-| `8.2` | `3.2.15`    | `2.2.0` | `5.3.7` `6.3.0` | `0.6.8`          | `4.8.13` `5.1.8` `6.1.7` | `4.12.1` `22.1.2` `25.2.0` `26.2.0` |
+| PHP   | igbinary    | msgpack | redis           | relay            | swoole                    | openswoole                          |
+| ----- | ----------- | ------- | --------------- | ---------------- | ------------------------- | ----------------------------------- |
+| `8.1` | `3.2.15`    | `2.2.0` | `5.3.7` `6.3.0` | `0.6.8`          | `4.8.13` `5.1.8` `6.1.7`  | `4.12.1` `22.1.2`                   |
+| `8.2` | `3.2.15`    | `2.2.0` | `5.3.7` `6.3.0` | `0.6.8`          | `4.8.13` `5.1.8` `6.1.7`  | `4.12.1` `22.1.2` `25.2.0` `26.2.0` |
 | `8.3` | `3.2.15`    | `2.2.0` | `5.3.7` `6.3.0` | `0.6.8` `0.20.0` | `5.1.8` `6.1.7`           | `22.1.2` `25.2.0` `26.2.0`          |
 | `8.4` | `3.2.15`    | `2.2.0` | `6.3.0`         | `0.20.0`         | `6.1.7`                   | `25.2.0` `26.2.0`                   |
 | `8.5` | `3.2.17RC1` | `2.2.0` | `6.3.0`         | `0.20.0`         | `6.2.0RC1`                | `26.2.0`                            |
 
 ### heroku-24 stack
 
-| PHP   | igbinary    | msgpack | redis           | relay            | swoole                    | openswoole                           |
-| ----- | ----------- | ------- | --------------- | ---------------- | ------------------------- | ------------------------------------ |
-| `8.2` | `3.2.15`    | `2.2.0` | `5.3.7` `6.3.0` | `0.6.8`          | `4.8.13` `5.1.8` `6.1.7` | `22.1.2` `25.2.0` `26.2.0`          |
+| PHP   | igbinary    | msgpack | redis           | relay            | swoole                    | openswoole                          |
+| ----- | ----------- | ------- | --------------- | ---------------- | ------------------------- | ----------------------------------- |
+| `8.2` | `3.2.15`    | `2.2.0` | `5.3.7` `6.3.0` | `0.6.8`          | `4.8.13` `5.1.8` `6.1.7`  | `22.1.2` `25.2.0` `26.2.0`          |
 | `8.3` | `3.2.15`    | `2.2.0` | `5.3.7` `6.3.0` | `0.6.8` `0.20.0` | `5.1.8` `6.1.7`           | `22.1.2` `25.2.0` `26.2.0`          |
 | `8.4` | `3.2.15`    | `2.2.0` | `6.3.0`         | `0.20.0`         | `6.1.7`                   | `25.2.0` `26.2.0`                   |
 | `8.5` | `3.2.17RC1` | `2.2.0` | `6.3.0`         | `0.20.0`         | `6.2.0RC1`                | `26.2.0`                            |
