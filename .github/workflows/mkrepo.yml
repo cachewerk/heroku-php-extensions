@@ -42,7 +42,6 @@ jobs:
 
     env:
       S3_BUCKET: ${{ secrets.S3_BUCKET || 'heroku-php-extensions' }}
-      S3_REGION: ${{ secrets.S3_REGION || '' }}
       S3_PREFIX: ${{ inputs.S3_PREFIX || matrix.stack.develop }}
       BUILDPACK: ./vendor/heroku/heroku-buildpack-php
 
