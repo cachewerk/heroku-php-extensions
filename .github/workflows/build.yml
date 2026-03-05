@@ -2,7 +2,8 @@ name: Build extensions
 
 on:
   push:
-    branches: [main, feature/*]
+    branches: [main]
+  workflow_dispatch:
   workflow_call:
     inputs:
       S3_PREFIX:
@@ -17,7 +18,7 @@ jobs:
     env:
       S3_BUCKET: ${{ secrets.S3_BUCKET || 'heroku-php-extensions' }}
       S3_REGION: ${{ secrets.S3_REGION || '' }}
-      S3_PREFIX: ${{ inputs.S3_PREFIX || '' }}
+      S3_PREFIX: ${{ inputs.S3_PREFIX || matrix.stack.prefix }}
       BUILDPACK: ./vendor/heroku/heroku-buildpack-php
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -27,13 +28,13 @@ jobs:
       matrix:
         stack:
           - name: "heroku-22"
-            prefix: "dist-heroku-22-stable/"
+            prefix: "dist-heroku-22-develop/"
             os: "ubuntu-latest"
           - name: "heroku-24"
-            prefix: "dist-heroku-24-amd64-stable/"
+            prefix: "dist-heroku-24-amd64-develop/"
             os: "ubuntu-latest"
           - name: "heroku-24"
-            prefix: "dist-heroku-24-arm64-stable/"
+            prefix: "dist-heroku-24-arm64-develop/"
             os: "ubuntu-24.04-arm"
         series:
           - version: 20210902
@@ -136,7 +137,7 @@ jobs:
           # heroku-24 cannot compile openswoole 4.12.1 anymore, include for heroku-22 only
           - stack:
               name: "heroku-22"
-              prefix: "dist-heroku-22-stable/"
+              prefix: "dist-heroku-22-develop/"
               os: "ubuntu-latest"
             series:
               version: 20220829
