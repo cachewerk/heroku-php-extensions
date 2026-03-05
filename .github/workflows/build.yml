@@ -1,5 +1,9 @@
 name: Build extensions
 
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.number) || 's3-repository' }}
+  cancel-in-progress: false
+
 on:
   push:
     branches: [main]

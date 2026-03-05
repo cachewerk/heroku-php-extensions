@@ -1,6 +1,10 @@
 
 name: Synchronize
 
+concurrency:
+  group: s3-repository
+  cancel-in-progress: false
+
 on:
   workflow_dispatch:
   release:
