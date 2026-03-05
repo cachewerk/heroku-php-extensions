@@ -16,9 +16,18 @@ jobs:
     strategy:
       matrix:
         stack:
-          - { name: "heroku-22", prefix: "dist-heroku-22-stable/", prefixdevelop: "dist-heroku-22-develop/", os: "ubuntu-latest" }
-          - { name: "heroku-24", prefix: "dist-heroku-24-amd64-stable/", prefixdevelop: "dist-heroku-24-amd64-develop/", os: "ubuntu-latest" }
-          - { name: "heroku-24", prefix: "dist-heroku-24-arm64-stable/", prefixdevelop: "dist-heroku-24-arm64-develop/", os: "ubuntu-24.04-arm" }
+          - name: "heroku-22"
+            stable: "dist-heroku-22-stable/"
+            develop: "dist-heroku-22-develop/"
+            os: "ubuntu-latest"
+          - name: "heroku-24"
+            stable: "dist-heroku-24-amd64-stable/"
+            develop: "dist-heroku-24-amd64-develop/"
+            os: "ubuntu-latest"
+          - name: "heroku-24"
+            stable: "dist-heroku-24-arm64-stable/"
+            develop: "dist-heroku-24-arm64-develop/"
+            os: "ubuntu-24.04-arm"
 
     env:
       S3_BUCKET: ${{ secrets.S3_BUCKET || 'heroku-php-extensions' }}
@@ -49,4 +58,4 @@ jobs:
         run: |
           echo "yes" | docker run --rm -i \
             --env-file=${BUILDPACK}/support/build/_docker/env.default \
-            ${{ matrix.stack.name }} sync.sh $S3_BUCKET ${{ matrix.stack.prefix }} $S3_BUCKET ${{ matrix.stack.prefixdevelop }}
+            ${{ matrix.stack.name }} sync.sh $S3_BUCKET ${{ matrix.stack.stable }} $S3_BUCKET ${{ matrix.stack.develop }}

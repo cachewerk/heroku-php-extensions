@@ -5,11 +5,13 @@ on: pull_request
 
 jobs:
   call-build:
+    name: Build extensions
     uses: ./.github/workflows/build.yml
     with:
       S3_PREFIX: pull-requests/${{ github.event.number }}/
 
   call-mkrepo:
+    name: Make repositories
     uses: ./.github/workflows/mkrepo.yml
     with:
       S3_PREFIX: pull-requests/${{ github.event.number }}/
