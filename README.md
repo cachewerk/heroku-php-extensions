@@ -24,14 +24,12 @@ heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://relay.so/heroku/"
 If you prefer using the AWS S3 repositories, add the corresponding repository to your Heroku app:
 
 ```bash
-# heroku-20 (archive only, not supported anymore)
-heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://heroku-php-extensions.s3.amazonaws.com/dist-heroku-20-stable/"
-
 # heroku-22
 heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://heroku-php-extensions.s3.amazonaws.com/dist-heroku-22-stable/"
 
 # heroku-24 (amd64)
 heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://heroku-php-extensions.s3.amazonaws.com/dist-heroku-24-amd64-stable/"
+
 # heroku-24 (arm64)
 heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://heroku-php-extensions.s3.amazonaws.com/dist-heroku-24-arm64-stable/"
 ```
@@ -113,6 +111,6 @@ Create a custom Dockerfile for `heroku-24`.
 # Build openswoole
 ./scripts/build-extension.sh heroku-24 8.4 20240924 openswoole 25.2.0 "php-8.4.*" "dist-heroku-24-amd64-stable/"
 ```
-### Adding new versions
+### Versions
 
-New versions can be added to [build.yml](./.github/workflows/build.yml) and will automatically be built and deployed by github actions
+Versions can be added and upgraded in [build.yml](./.github/workflows/build.yml) and will automatically be built and deployed by GitHub actions.
