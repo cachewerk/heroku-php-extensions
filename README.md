@@ -19,7 +19,7 @@ Add the platform repository to your Heroku app:
 
 ```bash
 heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://relay.so/heroku/"
-# heroku config:set HEROKU_PHP_PLATFORM_REPOSITORIES="https://relay.so/heroku/arm64"
+# or `https://relay.so/heroku/arm64` for ARM
 ```
 
 If you prefer using the AWS S3 repositories, add the corresponding repository to your Heroku app:
