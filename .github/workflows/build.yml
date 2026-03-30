@@ -87,6 +87,35 @@ jobs:
       - name: Docker build
         run: ./scripts/build-dockerfile.sh ${{ matrix.stack.name }}
 
+      - name: Resolve PHP version
+        run: |
+          python3 - <<'EOF'
+          import json, os, re, urllib.request
+          minor = "${{ matrix.series.php }}"
+          prefix = "${{ matrix.stack.upstream }}"
+          releases = json.loads(urllib.request.urlopen(
+            urllib.request.Request(
+              "https://api.github.com/repos/php/php-src/releases?per_page=100",
+              headers={"Authorization": "Bearer ${{ github.token }}"}
+            )
+          ).read())
+          for r in releases:
+            m = re.fullmatch(r"php-(" + re.escape(minor) + r"\.\d+)", r["tag_name"])
+            if m and not r["prerelease"] and not r["draft"]:
+              version = m.group(1)
+              url = f"https://lang-php.s3.amazonaws.com/{prefix}php-{version}.tar.gz"
+              try:
+                urllib.request.urlopen(urllib.request.Request(url, method="HEAD"))
+                with open(os.environ["GITHUB_ENV"], "a") as f:
+                  f.write(f"PHP_VERSION={version}\n")
+                print(f"Resolved PHP {minor} -> {version}")
+                break
+              except Exception:
+                pass
+          else:
+            raise RuntimeError(f"No PHP {minor} release found in lang-php")
+          EOF
+
       - name: Build liblzf library
         run: ./scripts/build-lib.sh ${{ matrix.stack.name }} liblzf "${{ matrix.series.liblzf }}" true
 
@@ -97,35 +126,35 @@ jobs:
         run: ./scripts/build-lib.sh ${{ matrix.stack.name }} zstd "${{ matrix.series.zstd }}" true
 
       - name: Build igbinary extension
-        run: ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} igbinary "${{ matrix.series.igbinary }}" "php-${{ matrix.series.php }}.*" ${{ matrix.stack.upstream }} true
+        run: ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} igbinary "${{ matrix.series.igbinary }}" "php-${{ env.PHP_VERSION }}" ${{ matrix.stack.upstream }} true
 
       - name: Build msgpack extension
-        run: ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} msgpack "${{ matrix.series.msgpack }}" "php-${{ matrix.series.php }}.*" ${{ matrix.stack.upstream }} true
+        run: ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} msgpack "${{ matrix.series.msgpack }}" "php-${{ env.PHP_VERSION }}" ${{ matrix.stack.upstream }} true
 
       - name: Build redis extensions
         run: |
           set -e
           for VERSION in ${{ join(matrix.series.redis, ' ') }}; do
-            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} redis "$VERSION" "php-${{ matrix.series.php }}.*,libraries/liblzf-*,libraries/lz4-*,libraries/zstd-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/igbinary-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/msgpack-*" ${{ matrix.stack.upstream }} true
+            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} redis "$VERSION" "php-${{ env.PHP_VERSION }},libraries/liblzf-*,libraries/lz4-*,libraries/zstd-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/igbinary-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/msgpack-*" ${{ matrix.stack.upstream }} true
           done
 
       - name: Build relay extension
         run: |
           set -e
           for VERSION in ${{ join(matrix.series.relay, ' ') }}; do
-            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} relay "$VERSION" "php-${{ matrix.series.php }}.*,libraries/liblzf-*,libraries/lz4-*,libraries/zstd-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/igbinary-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/msgpack-*" ${{ matrix.stack.upstream }} true
+            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} relay "$VERSION" "php-${{ env.PHP_VERSION }},libraries/liblzf-*,libraries/lz4-*,libraries/zstd-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/igbinary-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/msgpack-*" ${{ matrix.stack.upstream }} true
           done
 
       - name: Build swoole extension
         run: |
           set -e
           for VERSION in ${{ join(matrix.series.swoole, ' ') }}; do
-            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} swoole "$VERSION" "php-${{ matrix.series.php }}.*" ${{ matrix.stack.upstream }} true
+            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} swoole "$VERSION" "php-${{ env.PHP_VERSION }}" ${{ matrix.stack.upstream }} true
           done
 
       - name: Build openswoole extension
         run: |
           set -e
           for VERSION in ${{ join(matrix.series.openswoole, ' ') }}; do
-            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} openswoole "$VERSION" "php-${{ matrix.series.php }}.*" ${{ matrix.stack.upstream }} true
+            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} openswoole "$VERSION" "php-${{ env.PHP_VERSION }}" ${{ matrix.stack.upstream }} true
           done
