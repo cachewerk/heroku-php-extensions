@@ -27,7 +27,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         stack:
           - name: "heroku-22"
