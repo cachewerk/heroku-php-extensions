@@ -88,7 +88,7 @@ jobs:
         run: ./scripts/build-dockerfile.sh ${{ matrix.stack.name }}
 
       - name: Resolve PHP version
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const minor = '${{ matrix.series.php }}';
