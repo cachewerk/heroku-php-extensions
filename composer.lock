@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c367bb8077b561eb9a2ebdeb5ed8041f",
+    "content-hash": "ed8b228baae5e682a3980962af7df75e",
     "packages": [],
     "packages-dev": [
         {
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "74456d03da581b9a0568157afdd9543688262bf8"
+                "reference": "fdf6d003550a1e537a0f51c2d9f8fc940ce76dc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/74456d03da581b9a0568157afdd9543688262bf8",
-                "reference": "74456d03da581b9a0568157afdd9543688262bf8",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/fdf6d003550a1e537a0f51c2d9f8fc940ce76dc1",
+                "reference": "fdf6d003550a1e537a0f51c2d9f8fc940ce76dc1",
                 "shasum": ""
             },
             "default-branch": true,
@@ -51,7 +51,7 @@
                 "issues": "https://github.com/heroku/heroku-buildpack-php/issues",
                 "source": "https://github.com/heroku/heroku-buildpack-php/tree/main"
             },
-            "time": "2026-02-18T15:58:28+00:00"
+            "time": "2026-05-26T17:17:18+00:00"
         }
     ],
     "aliases": [],
@@ -62,13 +62,13 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.3",
+        "php": "^8.4",
         "ext-igbinary": "*",
         "ext-msgpack": "*",
         "ext-redis": "*",
         "ext-relay": "*",
         "ext-swoole": "*"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.2.0"
 }

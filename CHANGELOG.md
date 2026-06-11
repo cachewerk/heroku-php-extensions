@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.1.0] - 2026-06-11
+- Added `heroku-26` stack support
+- Added Swoole v6.2.1
+
+### Changed
+- Adapted build workflow according to latest changes done in [heroku/heroku-buildpack-php](https://github.com/heroku/heroku-buildpack-php/pull/907)
+
+### Removed
+- Dropped `heroku-22` stack support
+
 ## [3.0.0] - 2026-03-05
 
 ### Added
@@ -112,6 +122,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial release
 
 [Unreleased]: https://github.com/cachewerk/heroku-php-extensions/compare/v3.0.0...HEAD
+[3.1.0]: https://github.com/cachewerk/heroku-php-extensions/compare/v3.0.1...v3.1.0
 [3.0.0]: https://github.com/cachewerk/heroku-php-extensions/compare/v2.0.1...v3.0.0
 [2.0.1]: https://github.com/cachewerk/heroku-php-extensions/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/cachewerk/heroku-php-extensions/compare/v1.2.6...v2.0.0

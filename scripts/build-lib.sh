@@ -17,19 +17,24 @@ fi
 echo "--- Building $LIBNAME $LIBVERSION ---"
 
 # Create the library build script
-cat <<EOF > "${SCRIPT_DIR}/../libraries/${LIBNAME}-${LIBVERSION}"
+cat <<EOF > "${SCRIPT_DIR}/../${LIBNAME}-${LIBVERSION}"
 #!/bin/bash
 # Build Path: /app/.heroku/php/
-source \$(dirname \$0)/$LIBNAME
+WORKSPACE_DIR=/workspace/libraries
+source \$(dirname \$0)/libraries/$LIBNAME
 EOF
 
 # Set the build command based on whether we want to deploy or not
 COMMAND="bob build"
-ENV_FILE=".env"
+
+if [[ -f ".env" ]]; then
+    ENV_FILE=".env"
+else
+    ENV_FILE="$SCRIPT_DIR/../vendor/heroku/heroku-buildpack-php/support/build/docker/env.default"
+fi
 OVERWRITE_FLAG=""
 if [ "$WITH_DEPLOY" = "true" ]; then
     COMMAND="deploy.sh"
-    ENV_FILE="$SCRIPT_DIR/../vendor/heroku/heroku-buildpack-php/support/build/_docker/env.default"
     OVERWRITE_FLAG="--overwrite"
 fi
 
@@ -40,6 +45,6 @@ docker run --rm \
 -w /workspace \
 --env-file="$ENV_FILE" \
 $HEROKUSTACK \
-${COMMAND} ${OVERWRITE_FLAG} libraries/${LIBNAME}-${LIBVERSION}
+${COMMAND} ${OVERWRITE_FLAG} ${LIBNAME}-${LIBVERSION}
 
 set +x

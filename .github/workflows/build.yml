@@ -22,6 +22,7 @@ jobs:
     env:
       S3_BUCKET: ${{ secrets.S3_BUCKET || 'heroku-php-extensions' }}
       S3_PREFIX: ${{ inputs.S3_PREFIX || matrix.stack.prefix }}
+      S3_REGION: ${{ secrets.S3_REGION || 'us-east-1' }}
       BUILDPACK: ./vendor/heroku/heroku-buildpack-php
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -30,11 +31,6 @@ jobs:
       fail-fast: false
       matrix:
         stack:
-          - name: "heroku-22"
-            arch: "amd64"
-            prefix: "dist-heroku-22-develop/"
-            upstream: "dist-heroku-22-stable/"
-            os: "ubuntu-latest"
           - name: "heroku-24"
             arch: "amd64"
             prefix: "dist-heroku-24-amd64-develop/"
@@ -45,31 +41,41 @@ jobs:
             prefix: "dist-heroku-24-arm64-develop/"
             upstream: "dist-heroku-24-arm64-stable/"
             os: "ubuntu-24.04-arm"
+          - name: "heroku-26"
+            arch: "amd64"
+            prefix: "dist-heroku-26-amd64-develop/"
+            upstream: "dist-heroku-26-amd64-stable/"
+            os: "ubuntu-latest"
+          - name: "heroku-26"
+            arch: "arm64"
+            prefix: "dist-heroku-26-arm64-develop/"
+            upstream: "dist-heroku-26-arm64-stable/"
+            os: "ubuntu-24.04-arm"
         series:
-          - { version: 20210902, php: "8.1", liblzf: "3.6", lz4: "1.9.3", zstd: "1.4.9", igbinary: "3.2.15", msgpack: "2.2.0", redis: ["5.3.7", "6.3.0"], relay: ["0.21.0"], swoole: ["4.8.13", "5.1.8", "6.1.7"], openswoole: ["4.12.1", "22.1.2"] }
-          - { version: 20220829, php: "8.2", liblzf: "3.6", lz4: "1.9.3", zstd: "1.4.9", igbinary: "3.2.15", msgpack: "2.2.0", redis: ["5.3.7", "6.3.0"], relay: ["0.21.0"], swoole: ["4.8.13", "5.1.8", "6.1.7"], openswoole: ["22.1.2", "25.2.0", "26.2.0"] }
-          - { version: 20230831, php: "8.3", liblzf: "3.6", lz4: "1.9.3", zstd: "1.4.9", igbinary: "3.2.15", msgpack: "2.2.0", redis: ["5.3.7", "6.3.0"], relay: ["0.21.0"], swoole: ["5.1.8", "6.1.7"], openswoole: ["22.1.2", "25.2.0", "26.2.0"] }
-          - { version: 20240924, php: "8.4", liblzf: "3.6", lz4: "1.9.3", zstd: "1.4.9", igbinary: "3.2.15", msgpack: "2.2.0", redis: ["6.3.0"], relay: ["0.21.0"], swoole: ["6.1.7"], openswoole: ["25.2.0", "26.2.0"] }
-          - { version: 20250925, php: "8.5", liblzf: "3.6", lz4: "1.10.0", zstd: "1.5.7", igbinary: "3.2.17RC1", msgpack: "2.2.0", redis: ["6.3.0"], relay: ["0.21.0"], swoole: ["6.2.0RC1"], openswoole: ["26.2.0"] }
+          - { php: "8.1", liblzf: "3.6", lz4: "1.9.3", zstd: "1.4.9", igbinary: "3.2.15", msgpack: "2.2.0", redis: ["5.3.7", "6.3.0"], relay: ["0.21.0"], swoole: ["4.8.13", "5.1.8", "6.1.7"], openswoole: ["4.12.1", "22.1.2"] }
+          - { php: "8.2", liblzf: "3.6", lz4: "1.9.3", zstd: "1.4.9", igbinary: "3.2.15", msgpack: "2.2.0", redis: ["5.3.7", "6.3.0"], relay: ["0.21.0"], swoole: ["4.8.13", "5.1.8", "6.1.7"], openswoole: ["22.1.2", "25.2.0", "26.2.0"] }
+          - { php: "8.3", liblzf: "3.6", lz4: "1.9.3", zstd: "1.4.9", igbinary: "3.2.15", msgpack: "2.2.0", redis: ["5.3.7", "6.3.0"], relay: ["0.21.0"], swoole: ["5.1.8", "6.1.7"], openswoole: ["22.1.2", "25.2.0", "26.2.0"] }
+          - { php: "8.4", liblzf: "3.6", lz4: "1.9.3", zstd: "1.4.9", igbinary: "3.2.15", msgpack: "2.2.0", redis: ["6.3.0"], relay: ["0.21.0"], swoole: ["6.1.7"], openswoole: ["25.2.0", "26.2.0"] }
+          - { php: "8.5", liblzf: "3.6", lz4: "1.10.0", zstd: "1.5.7", igbinary: "3.2.17RC1", msgpack: "2.2.0", redis: ["6.3.0"], relay: ["0.21.0"], swoole: ["6.2.1"], openswoole: ["26.2.0"] }
         exclude:
           # heroku-24 no longer supports php-8.1
           - stack:
               name: "heroku-24"
             series:
-              version: 20210902
-        include:
-          # heroku-24 cannot compile openswoole 4.12.1 anymore, include for heroku-22 only
+              php: "8.1"
+          # heroku-26 no longer supports php-8.1, 8.2, 8.3
           - stack:
-              name: "heroku-22"
-              arch: "amd64"
-              prefix: "dist-heroku-22-develop/"
-              upstream: "dist-heroku-22-stable/"
-              os: "ubuntu-latest"
+              name: "heroku-26"
             series:
-              version: 20220829
+              php: "8.1"
+          - stack:
+              name: "heroku-26"
+            series:  
               php: "8.2"
-              openswoole:
-                - "4.12.1"
+          - stack:
+              name: "heroku-26"
+            series:
+              php: "8.3"
 
     steps:
       - name: Checkout
@@ -98,7 +104,7 @@ jobs:
             for (const { tag_name, prerelease, draft } of data) {
               const m = !prerelease && !draft && tag_name.match(re);
               if (!m) continue;
-              const res = await fetch(`https://lang-php.s3.amazonaws.com/${prefix}php-${m[1]}.tar.gz`, { method: 'HEAD' });
+              const res = await fetch(`https://heroku-buildpack-php.s3.amazonaws.com/${prefix}php-${m[1]}.tar.gz`, { method: 'HEAD' });
               if (res.ok) { core.exportVariable('PHP_VERSION', m[1]); break; }
             }
 
@@ -112,35 +118,35 @@ jobs:
         run: ./scripts/build-lib.sh ${{ matrix.stack.name }} zstd "${{ matrix.series.zstd }}" true
 
       - name: Build igbinary extension
-        run: ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} igbinary "${{ matrix.series.igbinary }}" "php-${{ env.PHP_VERSION }}" ${{ matrix.stack.upstream }} true
+        run: ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} igbinary "${{ matrix.series.igbinary }}" "php-${{ env.PHP_VERSION }}" ${{ matrix.stack.upstream }} true
 
       - name: Build msgpack extension
-        run: ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} msgpack "${{ matrix.series.msgpack }}" "php-${{ env.PHP_VERSION }}" ${{ matrix.stack.upstream }} true
+        run: ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} msgpack "${{ matrix.series.msgpack }}" "php-${{ env.PHP_VERSION }}" ${{ matrix.stack.upstream }} true
 
       - name: Build redis extensions
         run: |
           set -e
           for VERSION in ${{ join(matrix.series.redis, ' ') }}; do
-            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} redis "$VERSION" "php-${{ env.PHP_VERSION }},libraries/liblzf-*,libraries/lz4-*,libraries/zstd-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/igbinary-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/msgpack-*" ${{ matrix.stack.upstream }} true
+            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} redis "$VERSION" "php-${{ env.PHP_VERSION }},liblzf-*,lz4-*,zstd-*,ext-igbinary-*_php-${{ matrix.series.php }},ext-msgpack-*_php-${{ matrix.series.php }}" ${{ matrix.stack.upstream }} true
           done
 
       - name: Build relay extension
         run: |
           set -e
           for VERSION in ${{ join(matrix.series.relay, ' ') }}; do
-            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} relay "$VERSION" "php-${{ env.PHP_VERSION }},libraries/liblzf-*,libraries/lz4-*,libraries/zstd-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/igbinary-*,extensions/no-debug-non-zts-${{ matrix.series.version }}/msgpack-*" ${{ matrix.stack.upstream }} true
+            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} relay "$VERSION" "php-${{ env.PHP_VERSION }},liblzf-*,lz4-*,zstd-*,ext-igbinary-*_php-${{ matrix.series.php }},ext-msgpack-*_php-${{ matrix.series.php }}" ${{ matrix.stack.upstream }} true
           done
 
       - name: Build swoole extension
         run: |
           set -e
           for VERSION in ${{ join(matrix.series.swoole, ' ') }}; do
-            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} swoole "$VERSION" "php-${{ env.PHP_VERSION }}" ${{ matrix.stack.upstream }} true
+            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} swoole "$VERSION" "php-${{ env.PHP_VERSION }}" ${{ matrix.stack.upstream }} true
           done
 
       - name: Build openswoole extension
         run: |
           set -e
           for VERSION in ${{ join(matrix.series.openswoole, ' ') }}; do
-            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} ${{ matrix.series.version }} openswoole "$VERSION" "php-${{ env.PHP_VERSION }}" ${{ matrix.stack.upstream }} true
+            ./scripts/build-extension.sh ${{ matrix.stack.name }} ${{ matrix.series.php }} openswoole "$VERSION" "php-${{ env.PHP_VERSION }}" ${{ matrix.stack.upstream }} true
           done

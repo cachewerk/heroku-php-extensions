@@ -31,10 +31,6 @@ jobs:
     strategy:
       matrix:
         stack:
-          - name: "heroku-22"
-            stable: "dist-heroku-22-stable/"
-            develop: "dist-heroku-22-develop/"
-            os: "ubuntu-latest"
           - name: "heroku-24"
             stable: "dist-heroku-24-amd64-stable/"
             develop: "dist-heroku-24-amd64-develop/"
@@ -43,11 +39,22 @@ jobs:
             stable: "dist-heroku-24-arm64-stable/"
             develop: "dist-heroku-24-arm64-develop/"
             os: "ubuntu-24.04-arm"
+          - name: "heroku-26"
+            stable: "dist-heroku-26-amd64-stable/"
+            develop: "dist-heroku-26-amd64-develop/"
+            os: "ubuntu-latest"
+          - name: "heroku-26"
+            stable: "dist-heroku-26-arm64-stable/"
+            develop: "dist-heroku-26-arm64-develop/"
+            os: "ubuntu-24.04-arm"
 
     env:
       S3_BUCKET: ${{ secrets.S3_BUCKET || 'heroku-php-extensions' }}
       S3_PREFIX: ${{ inputs.S3_PREFIX || matrix.stack.develop }}
+      S3_REGION: ${{ secrets.S3_REGION || 'us-east-1' }}
       BUILDPACK: ./vendor/heroku/heroku-buildpack-php
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     steps:
       - name: Checkout
@@ -71,5 +78,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           docker run --rm \
-            --env-file=${BUILDPACK}/support/build/_docker/env.default \
+            --env-file=${BUILDPACK}/support/build/docker/env.default \
             ${{ matrix.stack.name }} mkrepo.sh --upload

@@ -6,21 +6,21 @@ set -o pipefail
 # fail harder
 set -eu
 
-util_dir=$(dirname $BASH_SOURCE)/../vendor/heroku/heroku-buildpack-php/support/build/_util
+util_dir=$(dirname $BASH_SOURCE)/../vendor/heroku/heroku-buildpack-php/support/build/util
 
 source ${util_dir}/include/manifest.sh
 
 OUT_PREFIX=$1
 
-dep_formula=${0#$WORKSPACE_DIR/}
+dep_formula=${0##*/}
 dep_name=$(basename $BASH_SOURCE)
-dep_version=${dep_formula##*"/${dep_name}-"}
+dep_version=${dep_formula##*-}
 dep_package=${dep_name}-${dep_version}
 dep_dirname=liblzf-${dep_version}
 dep_url=https://deb.debian.org/debian/pool/main/libl/liblzf/liblzf_${dep_version}.orig.tar.gz
 dep_manifest=${dep_package}.composer.json
 
-echo "-----> Building ${dep_package}..."
+echo "-----> Building formula ${dep_formula} which results in package ${dep_package}..."
 
 curl -L ${dep_url} | tar xz
 pushd ${dep_dirname}
