@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Adapted build workflow according to latest changes done in [heroku/heroku-buildpack-php](https://github.com/heroku/heroku-buildpack-php/pull/907)
+- Updated [Relay](https://github.com/cachewerk/relay) to v0.22.0
 
 ### Removed
 - Dropped `heroku-22` stack support

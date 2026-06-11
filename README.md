@@ -104,7 +104,7 @@ Create a custom Dockerfile for `heroku-24`.
 ./scripts/build-extension.sh heroku-24 8.4 redis 6.3.0 "php-8.4.*,liblzf-*,lz4-*,zstd-*,ext-igbinary-*_php-8.4,ext-msgpack-*_php-8.4" "dist-heroku-24-amd64-stable/"
 
 # Build relay (has extra dependencies, libraries need to be "deployed" already)
-./scripts/build-extension.sh heroku-24 8.4 relay 0.20.0 "php-8.4.*,liblzf-*,lz4-*,zstd-*,ext-igbinary-*_php-8.4,ext-msgpack-*_php-8.4" "dist-heroku-24-amd64-stable/"
+./scripts/build-extension.sh heroku-24 8.4 relay 0.22.0 "php-8.4.*,liblzf-*,lz4-*,zstd-*,ext-igbinary-*_php-8.4,ext-msgpack-*_php-8.4" "dist-heroku-24-amd64-stable/"
 
 # Build swoole
 ./scripts/build-extension.sh heroku-24 8.4 swoole 6.1.7 "php-8.4.*" "dist-heroku-24-amd64-stable/"
