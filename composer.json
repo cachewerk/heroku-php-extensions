@@ -13,5 +13,10 @@
     },
     "require-dev": {
         "heroku/heroku-buildpack-php": "dev-main"
+    },
+    "scripts": {
+        "compile": [
+            "./web/compile.sh"
+        ]
     }
 }
