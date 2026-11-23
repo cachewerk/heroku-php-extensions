@@ -57,6 +57,8 @@ jobs:
           - { php: "8.3", liblzf: "3.6", lz4: "1.9.3", zstd: "1.4.9", igbinary: "3.2.15", msgpack: "2.2.0", redis: ["5.3.7", "6.3.0"], relay: ["0.22.0"], swoole: ["5.1.8", "6.1.7"], openswoole: ["22.1.2", "25.2.0", "26.2.0"] }
           - { php: "8.4", liblzf: "3.6", lz4: "1.9.3", zstd: "1.4.9", igbinary: "3.2.15", msgpack: "2.2.0", redis: ["6.3.0"], relay: ["0.22.0"], swoole: ["6.1.7"], openswoole: ["25.2.0", "26.2.0"] }
           - { php: "8.5", liblzf: "3.6", lz4: "1.10.0", zstd: "1.5.7", igbinary: "3.2.17RC1", msgpack: "2.2.0", redis: ["6.3.0"], relay: ["0.22.0"], swoole: ["6.2.1"], openswoole: ["26.2.0"] }
+          # no Swoole release supports PHP 8.6 yet
+          - { php: "8.6", liblzf: "3.6", lz4: "1.10.0", zstd: "1.5.7", igbinary: "3.2.17RC1", msgpack: "3.0.1", redis: ["6.4.0RC1"], relay: ["0.62.0"], swoole: [], openswoole: ["26.11.1"] }
         exclude:
           # heroku-24 no longer supports php-8.1
           - stack:
