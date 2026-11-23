@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- Added PHP 8.6 support (without Swoole, which has no PHP 8.6 release yet)
+- Added PhpRedis v6.4.0RC1, OpenSwoole v26.11.1 and [Relay](https://github.com/cachewerk/relay) v0.62.0 for PHP 8.6
+
 ## [3.1.0] - 2026-06-11
 - Added `heroku-26` stack support
 - Added Swoole v6.2.1
